@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:include="common :: commonheader"></div>
+    <link rel="stylesheet" th:href="@{/css/community.css}"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div th:replace="common :: headermenu"></div>
+</nav>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>发 起</h2>
+            <hr>
+            <form action="">
+                <div class="form-group">
+                    <label for="title">问题标题 (简单描述) :</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="问题标题....">
+                </div>
+                <div class="form-group">
+                    <label for="title">问题补充 (必填,请参照右侧提示) :</label>
+                    <textarea name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="title">添加标签 :</label>
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签,以','分隔">
+                </div>
+
+                <button type="submit" class="btn btn-success btn-publish">发布!</button>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>问题指南</h3>
+            1.请先表明你已经做了上述的努力；这将有助于树立你并不是一个不劳而获且浪费别人的时间的提问者。在社区里提问或者发起相关技术话题讨论是被鼓励的，但是提问也是一门艺术，需要提问者好好把握。<br>
+
+            2.请按照主题模板尽可能详细、清晰、正确、精简地描述你的问题。<br>
+
+            3.无效的问题，往往浪费大家的时间去阅读和理解，并且可能没有人去给你解答。<br>
+            4.请给问题起一个准确的标题，以及选择其正确的分类、标签。<br>
+
+            5.提问时要有一定的礼貌，尤其通过社区向个人提问时至关重要。<br>
+
+            6.别人没有义务一定要给你解决问题，尤其当该问题需要花费不少时间去梳理和解答。<br>
+
+            7.应该礼貌地请教问题，不管问题最终是否得到解答，都能够表示感谢。客气一点肯定会增加你得到有用回应的机会。<br>
+        </div>
+    </div>
+</div>
+</body>
+</html>

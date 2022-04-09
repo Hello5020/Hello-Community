@@ -1,4 +1,6 @@
 package com.hello.community.mapper;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 import com.hello.community.bean.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
@@ -15,6 +17,8 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Override
     int insert(User user);
+
+    User selectByToken(@Param("token") String token);
 }
 
 

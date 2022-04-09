@@ -17,4 +17,11 @@
         id,account_id,name,
         token,gmt_creat,gmt_modified
     </sql>
+    <select id="selectByToken" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where
+        token = #{token,jdbcType=VARCHAR}
+    </select>
 </mapper>

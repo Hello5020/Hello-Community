@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hello.community.bean.User;
 import com.hello.community.service.UserService;
 import com.hello.community.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
 * @author 25047
@@ -14,6 +17,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     implements UserService{
+
+    @Autowired
+    UserMapper userMapper;
+
+    @Override
+    public int insertUser(User user){
+       return userMapper.insert(user);
+    }
+
+    @Override
+    public User getUserByToken(String token) {
+        return userMapper.selectByToken(token);
+    }
+
 
 }
 
