@@ -1,4 +1,5 @@
 package com.hello.community.mapper;
+import java.io.Serializable;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,6 +20,9 @@ public interface UserMapper extends BaseMapper<User> {
     int insert(User user);
 
     User selectByToken(@Param("token") String token);
+
+    @Override
+    User selectById(Serializable id);
 }
 
 

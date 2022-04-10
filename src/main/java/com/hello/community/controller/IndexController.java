@@ -1,7 +1,10 @@
 package com.hello.community.controller;
 
+import com.hello.community.bean.Question;
 import com.hello.community.bean.User;
+import com.hello.community.dto.QuestionDTO;
 import com.hello.community.mapper.UserMapper;
+import com.hello.community.service.QuestionService;
 import com.hello.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,20 +23,30 @@ public class IndexController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    QuestionService questionService;
+
     @GetMapping("/")
-    public String hello(HttpServletRequest request){
+    public String hello(HttpServletRequest request,
+                        Model model){
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie:
-             cookies) {
-            if (cookie.getName().equals("token")) {
-                String token = cookie.getValue();
-                User user = userService.getUserByToken(token);
-                if (user != null) {
-                    request.getSession().setAttribute("loginUser",user);
+        if(cookies != null && cookies.length != 0){
+            for (Cookie cookie:
+                    cookies) {
+                if (cookie.getName().equals("token")) {
+                    String token = cookie.getValue();
+                    User user = userService.getUserByToken(token);
+                    if (user != null) {
+                        request.getSession().setAttribute("loginUser",user);
+                    }
+                    break;
                 }
-                break;
             }
         }
+
+        List<QuestionDTO> questionList = questionService.getAll();
+        model.addAttribute("questions",questionList);
+
         return "index";
     }
 }

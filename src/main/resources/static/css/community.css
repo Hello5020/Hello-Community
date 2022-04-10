@@ -2,10 +2,45 @@
     background-color: silver;
     margin: 30px;
 }
+.index{
+    background-color: #f9f2f4;
+    margin: 30px;
+}
 body{
-    background-color: white;
+    background-color: #c9ecff;
 }
 .btn-publish{
     float: right;
     margin-bottom: 15px;
+}
+@font-face {
+    font-family: "iconfont"; /* Project id 3317276 */
+    src: url('//at.alicdn.com/t/font_3317276_1s40phm3f12.woff2?t=1649597450687') format('woff2'),
+    url('//at.alicdn.com/t/font_3317276_1s40phm3f12.woff?t=1649597450687') format('woff'),
+    url('//at.alicdn.com/t/font_3317276_1s40phm3f12.ttf?t=1649597450687') format('truetype');
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-huo:before {
+    content: "\e90b";
+}
+
+.icon-viewlist:before {
+    content: "\e6b5";
+}
+
+.media-object{
+    width: 46px;
+    height: 46px;
+}
+.text-desc {
+    font-size: 12px;
+    font-weight: normal;
+    color: #9d9d9d;
 }

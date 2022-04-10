@@ -31,6 +31,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return userMapper.selectByToken(token);
     }
 
+    @Override
+    public User getUserById(Integer id) {
+        return userMapper.selectById(id);
+    }
+
 
 }
 

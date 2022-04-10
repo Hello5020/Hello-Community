@@ -13,21 +13,32 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>发 起</h2>
             <hr>
-            <form action="">
+            <form th:action="@{/publish}" method="post">
                 <div class="form-group">
                     <label for="title">问题标题 (简单描述) :</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="问题标题....">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="问题标题...." th:value="${title}">
                 </div>
                 <div class="form-group">
                     <label for="title">问题补充 (必填,请参照右侧提示) :</label>
-                    <textarea name="description" id="description" class="form-control" cols="30" rows="10"></textarea>
+                    <textarea name="description" id="description" class="form-control" cols="30" rows="10" th:value="${description}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">添加标签 :</label>
-                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签,以','分隔">
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签,以','分隔" th:value="${tag}">
                 </div>
-
-                <button type="submit" class="btn btn-success btn-publish">发布!</button>
+                <div class="container-fluid main">
+                    <div class="row">
+                        <div class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" role="alert" th:if="${error != null}">
+                            <strong>Warning!</strong><br>
+                            <spen th:text="${error}"></spen>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit"
+                                     class="btn btn-success btn-publish">
+                            发布!</button>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">

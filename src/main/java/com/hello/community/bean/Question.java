@@ -9,11 +9,11 @@ import lombok.Data;
 
 /**
  * 
- * @TableName user
+ * @TableName question
  */
-@TableName(value ="user")
+@TableName(value ="question")
 @Data
-public class User implements Serializable {
+public class Question implements Serializable {
     /**
      * 
      */
@@ -23,37 +23,47 @@ public class User implements Serializable {
     /**
      * 
      */
-    private String accountId;
+    private String title;
 
     /**
      * 
      */
-    private String name;
+    private String description;
 
     /**
      * 
      */
-    private String token;
+    private Long gmtCreate;
 
     /**
      * 
      */
-    private Long gmtCreat;
+    private Long gmtModifie;
 
     /**
      * 
      */
-    private Long gmtModified;
+    private Integer creator;
 
     /**
      * 
      */
-    private String bio;
+    private Integer commentCount;
 
     /**
      * 
      */
-    private String avatarUrl;
+    private Integer viewCount;
+
+    /**
+     * 
+     */
+    private Integer likeCount;
+
+    /**
+     * 
+     */
+    private String tag;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
