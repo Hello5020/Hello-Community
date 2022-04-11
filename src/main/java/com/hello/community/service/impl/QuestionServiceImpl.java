@@ -1,5 +1,6 @@
 package com.hello.community.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hello.community.bean.Question;
 import com.hello.community.bean.User;
@@ -36,8 +37,10 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     }
 
     @Override
-    public List<QuestionDTO> getAll() {
-        List<Question> questionList = questionMapper.selectAll();
+    public List<QuestionDTO> getAll(Integer page,Integer size) {
+        Page<Question> pages = new Page<>(page, size);
+        questionMapper.selectPage(pages,null);
+        List<Question> questionList = pages.getRecords();
         List<QuestionDTO> questions = new ArrayList<>();
         for (Question question:
              questionList) {
@@ -49,6 +52,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         }
         return questions;
     }
+
 }
 
 

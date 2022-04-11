@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group">
                     <label for="title">问题补充 (必填,请参照右侧提示) :</label>
-                    <textarea name="description" id="description" class="form-control" cols="30" rows="10" th:value="${description}"></textarea>
+                    <textarea name="description" id="description" class="form-control" cols="30" rows="10" th:text="${description}"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="title">添加标签 :</label>
@@ -28,9 +28,11 @@
                 </div>
                 <div class="container-fluid main">
                     <div class="row">
-                        <div class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12" role="alert" th:if="${error != null}">
-                            <strong>Warning!</strong><br>
-                            <spen th:text="${error}"></spen>
+                        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" >
+                            <div class="alert alert-danger col-lg-9 col-md-12 col-sm-12 col-xs-12"  role="alert" th:if="${error != null}">
+                                <strong>Warning!</strong><br>
+                                <spen th:text="${error}"></spen>
+                            </div>
                         </div>
                         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                             <button type="submit"

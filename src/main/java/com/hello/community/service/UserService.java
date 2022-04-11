@@ -18,4 +18,5 @@ public interface UserService extends IService<User> {
     User getUserByToken(String token);
 
     User getUserById(Integer id);
+
 }

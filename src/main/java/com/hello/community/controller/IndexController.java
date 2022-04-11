@@ -1,5 +1,6 @@
 package com.hello.community.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Question;
 import com.hello.community.bean.User;
 import com.hello.community.dto.QuestionDTO;
@@ -28,7 +29,8 @@ public class IndexController {
 
     @GetMapping("/")
     public String hello(HttpServletRequest request,
-                        Model model){
+                        Model model,
+                        @RequestParam(value = "page",defaultValue = "1")Integer page){
         Cookie[] cookies = request.getCookies();
         if(cookies != null && cookies.length != 0){
             for (Cookie cookie:
@@ -44,9 +46,11 @@ public class IndexController {
             }
         }
 
-        List<QuestionDTO> questionList = questionService.getAll();
+        Page<Question> pages = new Page<>(page, 5);
+        Page<Question> page1 = questionService.page(pages, null);
+        List<QuestionDTO> questionList = questionService.getAll(page,5);
         model.addAttribute("questions",questionList);
-
+        model.addAttribute("pn",page1);
         return "index";
     }
 }

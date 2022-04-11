@@ -1,6 +1,8 @@
 package com.hello.community.mapper;
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hello.community.bean.Question;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,6 +19,7 @@ public interface QuestionMapper extends BaseMapper<Question> {
     int insert(Question question);
 
     List<Question> selectAll();
+
 }
 
 
