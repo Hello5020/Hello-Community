@@ -29,7 +29,7 @@
         </form>
         <ul class="nav navbar-nav navbar-right">
             <li th:if="${session.loginUser != null}">
-                <a class="btn btn-default" th:href="@{/publish}" role="button">发布</a>
+                <a class="btn btn-default" th:href="@{/publish}"  role="button">发布</a>
             </li>
             <li class="dropdown" th:if="${session.loginUser != null}">
                 <a href="#" class="dropdown-toggle"

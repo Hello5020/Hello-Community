@@ -30,14 +30,21 @@
                     </span>
                 </div>
             </div>
-            <nav aria-label="Page navigation">
+            <nav aria-label="Page navigation" >
                 <ul class="pagination">
                     <li>
-                        <a th:href="@{/(page=${pn.current}-1)}" th:if="${pn.current > 1}" aria-label="Previous">
+                        <a th:href="@{/(page=1)}" th:if="${pn.current > 1}" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
-                    <li><a th:if="${pn.getPages()<= 5}" th:href="@{'/?page=' + ${i}}" th:each="i :${pn.getPages()}" th:text=" ${i}" th:class="${pn.current == i}? 'pn.current? active' :' ' "></a></li>
+                    <li>
+                        <a th:href="@{/(page=${pn.current}-1)}" th:if="${pn.current > 1}" aria-label="Previous">
+                            <span aria-hidden="true"><</span>
+                        </a>
+                    </li>
+                    <li th:if="${pn.getPages()<= 5}" th:class="${num == pn.current?'active':''}" th:each="num:${#numbers.sequence(1,pn.pages)}">
+                        <a th:href="@{/(page=${num})}">[[${num}]]</a>
+                    </li>
 
                     <li><a th:if="${pn.getPages()> 5 && (pn.getPages() - pn.current) <= 2}" th:href="@{'/?page=' + ${i}}" th:each="i :${#numbers.sequence(pn.getPages() - 4, pn.getPages())}" th:text="  ${i}" th:class="${pn.current == i}? 'pn.current? active' :' ' "></a></li>
 
@@ -46,6 +53,11 @@
                     <li><a th:if="${pn.getPages()> 5 && ((pn.current - 1) > 2)&& (pn.getPages() - pn.current) > 2}" th:href="@{'/?page=' + ${i}}" th:each="i :${#numbers.sequence(pn.current - 2, pn.current + 2)}" th:text=" ${i}" th:class="${pn.current == i}? 'pn.current? active' :' ' "></a></li>
                     <li>
                         <a th:href="@{/(page=${pn.current}+1)}" th:if="${pn.current < pn.pages}" aria-label="Next">
+                            <span aria-hidden="true">></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/(page=${pn.pages})}" th:if="${pn.current < pn.pages}" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>

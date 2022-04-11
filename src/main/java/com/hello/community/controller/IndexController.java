@@ -45,7 +45,7 @@ public class IndexController {
                 }
             }
         }
-        Integer size = 1;
+        Integer size = 8;
         Page<Question> pages = new Page<>(page, size);
         Page<Question> page1 = questionService.page(pages, null);
         List<QuestionDTO> questionList = questionService.getAll(page,size);
