@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="commonheader">
-    <title>HELLO交流社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <script th:src="@{js/jquery.min.js}" type="text/javascript"></script>
     <script th:src="@{js/bootstrap.min.js}" type="application/javascript"></script>
@@ -35,10 +34,13 @@
                 <a href="#" class="dropdown-toggle"
                    data-toggle="dropdown" role="button"
                    aria-haspopup="true"
-                   aria-expanded="false"
-                   th:text="${session.loginUser.getName()}">我 <span class="caret"></span></a>
+                   aria-expanded="false">
+                    <span th:text="${session.loginUser.getName()}"></span>
+                    <span class="caret"></span>
+                </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">信息中心</a></li>
+                    <li><a th:href="@{/profile/questions}">我的话题</a></li>
+                    <li role="separator" class="divider"></li>
                     <li><a href="#">个人资料</a></li>
                     <li><a href="#">退出登录</a></li>
                     <li role="separator" class="divider"></li>

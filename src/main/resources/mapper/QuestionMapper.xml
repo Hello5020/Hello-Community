@@ -28,4 +28,12 @@
         <include refid="Base_Column_List"/>
         from question
     </select>
+    <select id="selectByCreator" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from question
+        where
+        creator = #{creator,jdbcType=NUMERIC}
+    </select>
+
 </mapper>

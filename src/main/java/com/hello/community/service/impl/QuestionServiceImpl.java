@@ -53,6 +53,28 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         return questions;
     }
 
+    @Override
+    public List<QuestionDTO> getAll(Integer id, Integer page, Integer size) {
+        Page<Question> pages = new Page<>(page, size);
+        Page<Question> questionPage = questionMapper.selectByCreator(pages, id);
+        List<Question> questionList = pages.getRecords();
+        List<QuestionDTO> questions = new ArrayList<>();
+        for (Question question:
+                questionList) {
+            User user = userService.getUserById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(user);
+            questions.add(questionDTO);
+        }
+        return questions;
+    }
+
+    @Override
+    public Page<Question> getPageByCreator(Page<Question> page, Integer creator) {
+        return questionMapper.selectByCreator(page,creator);
+    }
+
 }
 
 

@@ -1,4 +1,6 @@
 package com.hello.community.mapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
@@ -20,6 +22,7 @@ public interface QuestionMapper extends BaseMapper<Question> {
 
     List<Question> selectAll();
 
+    Page<Question> selectByCreator(@Param("page") Page<Question> page, @Param("creator") Integer creator);
 }
 
 

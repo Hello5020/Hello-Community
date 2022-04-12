@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Question;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hello.community.dto.QuestionDTO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +17,7 @@ public interface QuestionService extends IService<Question> {
 
     void create(Question question);
     List<QuestionDTO> getAll(Integer page,Integer size);
+    List<QuestionDTO> getAll(Integer id,Integer page,Integer size);
+    Page<Question> getPageByCreator(Page<Question> page,Integer creator);
+
 }
