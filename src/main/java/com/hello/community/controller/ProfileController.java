@@ -5,7 +5,6 @@ import com.hello.community.bean.Question;
 import com.hello.community.bean.User;
 import com.hello.community.dto.QuestionDTO;
 import com.hello.community.service.QuestionService;
-import com.hello.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,41 +12,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
 public class ProfileController {
 
     @Autowired
-    UserService userService;
-
-    @Autowired
     QuestionService questionService;
 
     @GetMapping("/profile/{action}")
     public String profile(
-            HttpServletRequest request,
+            HttpSession session,
             @PathVariable(name = "action")String action,
                           Model model,
             @RequestParam(value = "page",defaultValue = "1")Integer page){
-        User user = null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null && cookies.length != 0){
-            for (Cookie cookie:
-                    cookies) {
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    user = userService.getUserByToken(token);
-                    if (user != null) {
-                        request.getSession().setAttribute("loginUser",user);
-                    }
-                    break;
-                }
-            }
-        }
-
+        User user = (User) session.getAttribute("loginUser");
         if (user == null) {
             return "redirect:/";
         }

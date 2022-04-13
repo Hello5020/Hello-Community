@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import com.hello.community.bean.User;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 /**
 * @author 25047
@@ -23,6 +24,10 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Override
     User selectById(Serializable id);
+
+    User selectByAccountId(@Param("accountId") String accountId);
+
+    int updateById(User user);
 }
 
 

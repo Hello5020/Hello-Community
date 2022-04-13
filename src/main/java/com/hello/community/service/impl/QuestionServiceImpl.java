@@ -75,6 +75,16 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         return questionMapper.selectByCreator(page,creator);
     }
 
+    @Override
+    public QuestionDTO getQuestionById(Integer id) {
+        QuestionDTO questionDTO = new QuestionDTO();
+        Question question = getById(id);
+        User user = userService.getUserById(question.getCreator());
+        BeanUtils.copyProperties(question,questionDTO);
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
+
 }
 
 

@@ -2,27 +2,19 @@ package com.hello.community.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Question;
-import com.hello.community.bean.User;
 import com.hello.community.dto.QuestionDTO;
-import com.hello.community.mapper.UserMapper;
 import com.hello.community.service.QuestionService;
-import com.hello.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-
 public class IndexController {
-
-    @Autowired
-    UserService userService;
 
     @Autowired
     QuestionService questionService;
@@ -31,20 +23,6 @@ public class IndexController {
     public String hello(HttpServletRequest request,
                         Model model,
                         @RequestParam(value = "page",defaultValue = "1")Integer page){
-        Cookie[] cookies = request.getCookies();
-        if(cookies != null && cookies.length != 0){
-            for (Cookie cookie:
-                    cookies) {
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    User user = userService.getUserByToken(token);
-                    if (user != null) {
-                        request.getSession().setAttribute("loginUser",user);
-                    }
-                    break;
-                }
-            }
-        }
         Integer size = 8;
         Page<Question> pages = new Page<>(page, size);
         Page<Question> page1 = questionService.page(pages, null);

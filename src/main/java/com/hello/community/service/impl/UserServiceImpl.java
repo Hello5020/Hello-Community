@@ -36,6 +36,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return userMapper.selectById(id);
     }
 
+    @Override
+    public void insertOrUpdateUser(User user) {
+        User dbUser = userMapper.selectByAccountId(user.getAccountId());
+        if (dbUser == null) {
+            user.setGmtCreat(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreat());
+            insertUser(user);
+        }else{
+            dbUser.setGmtCreat(System.currentTimeMillis());
+            dbUser.setGmtModified(user.getGmtCreat());
+            dbUser.setToken(user.getToken());
+            dbUser.setName(user.getName());
+            dbUser.setAvatarUrl(user.getAvatarUrl());
+            userMapper.updateById(dbUser);
+        }
+    }
+
 
 }
 

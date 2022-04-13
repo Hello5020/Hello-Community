@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="commonheader">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <script th:src="@{js/jquery.min.js}" type="text/javascript"></script>
-    <script th:src="@{js/bootstrap.min.js}" type="application/javascript"></script>
+    <script th:src="@{/js/jquery.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/bootstrap.min.js}" type="application/javascript"></script>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}"/>
 </head>
@@ -42,7 +42,7 @@
                     <li><a th:href="@{/profile/questions}">我的话题</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">个人资料</a></li>
-                    <li><a href="#">退出登录</a></li>
+                    <li><a th:href="@{/logout}">退出登录</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#">向作者反馈</a></li>
                 </ul>

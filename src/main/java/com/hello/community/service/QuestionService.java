@@ -19,5 +19,6 @@ public interface QuestionService extends IService<Question> {
     List<QuestionDTO> getAll(Integer page,Integer size);
     List<QuestionDTO> getAll(Integer id,Integer page,Integer size);
     Page<Question> getPageByCreator(Page<Question> page,Integer creator);
+    QuestionDTO getQuestionById(Integer id);
 
 }

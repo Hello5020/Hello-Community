@@ -22,7 +22,9 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
+                    <h4 class="media-heading" >
+                        <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
+                    </h4>
                     <span th:text="${question.description}"></span><br>
                     <span class="text-desc">
                         <span th:text="${question.commentCount}"></span>条回复 |
@@ -44,7 +46,7 @@
                         </a>
                     </li>
                     <li th:if="${pn.getPages()<= 5}" th:class="${i == pn.current?'active':''}" th:each="i:${#numbers.sequence(1,pn.pages)}">
-                        <a th:href="@{/(page=${i})}">[[${i}]]</a>
+                        <a th:href="@{/(page=${i})}" th:if="${i > 0}">[[${i}]]</a>
                     </li>
 
                     <li th:if="${pn.getPages()> 5 && (pn.getPages() - pn.current) <= 2}" th:class="${i == pn.current?'active':''}" th:each="i :${#numbers.sequence(pn.getPages() - 4, pn.getPages())}" >

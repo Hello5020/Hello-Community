@@ -24,4 +24,18 @@
         where
         token = #{token,jdbcType=VARCHAR}
     </select>
+    <select id="selectAccountId" resultMap="BaseResultMap">
+        select account_id
+        from user
+    </select>
+    <select id="selectByAccountId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where
+        account_id = #{accountId,jdbcType=VARCHAR}
+    </select>
+    <update id="updateById">
+        update user set `name` = #{name},token=#{token},gmt_modified = #{gmtModified},avatar_url = #{avatarUrl} where id = #{id}
+    </update>
 </mapper>
