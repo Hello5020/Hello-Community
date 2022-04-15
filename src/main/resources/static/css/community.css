@@ -35,6 +35,9 @@ body{
     color: #999999;
     font-size: 13px;
 }
+.jumbotron{
+    margin: 50px;
+}
 @font-face {
     font-family: "iconfont"; /* Project id 3317276 */
     src: url('//at.alicdn.com/t/font_3317276_wvpvwpbt7yg.woff2?t=1649848499181') format('woff2'),

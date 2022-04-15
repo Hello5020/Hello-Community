@@ -44,7 +44,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             user.setGmtModified(user.getGmtCreat());
             insertUser(user);
         }else{
-            dbUser.setGmtCreat(System.currentTimeMillis());
             dbUser.setGmtModified(user.getGmtCreat());
             dbUser.setToken(user.getToken());
             dbUser.setName(user.getName());

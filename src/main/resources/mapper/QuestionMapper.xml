@@ -35,5 +35,20 @@
         where
         creator = #{creator,jdbcType=NUMERIC}
     </select>
+    <update id="updateById">
+        update question
+        set title=#{title},description=#{description},gmt_modifie=#{gmtModifie},tag=#{tag}
+        where
+                id = #{id,jdbcType=NUMERIC}
+    </update>
+    <update id="updateViewCount">
+        update question
+        set view_count = #{viewCount,jdbcType=NUMERIC}
+    </update>
+    <update id="updateViewCountById">
+        update question
+        set view_count = view_count+#{viewCount,jdbcType=NUMERIC}
+        where id = #{id,jdbcType=NUMERIC}
+    </update>
 
 </mapper>

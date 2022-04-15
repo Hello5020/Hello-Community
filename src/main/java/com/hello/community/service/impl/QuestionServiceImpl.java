@@ -85,6 +85,25 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         return questionDTO;
     }
 
+    @Override
+    public void createOrUpdate(Question question) {
+        if(question.getId() == null){
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModifie(question.getGmtCreate());
+            create(question);
+        }else{
+            question.setGmtModifie(question.getGmtCreate());
+            questionMapper.updateById(question);
+        }
+    }
+
+    @Override
+    public void incView(Integer id) {
+        Question question = getById(id);
+        question.setViewCount(1);
+        questionMapper.updateViewCountById(question);
+    }
+
 }
 
 

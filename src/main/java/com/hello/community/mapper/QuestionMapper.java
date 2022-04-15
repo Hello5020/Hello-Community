@@ -23,6 +23,13 @@ public interface QuestionMapper extends BaseMapper<Question> {
     List<Question> selectAll();
 
     Page<Question> selectByCreator(@Param("page") Page<Question> page, @Param("creator") Integer creator);
+
+
+    @Override
+    int updateById(Question entity);
+
+    int updateViewCountById(Question question);
+
 }
 
 

@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HELLO交流社区</title>
+    <div th:include="common :: commonheader"></div>
+    <link rel="stylesheet" th:href="@{/css/community.css}"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div th:replace="common :: headermenu"></div>
+</nav>
+<div class="container-fluid index">
+    <div class="jumbotron">
+        <h1><img alt="" src="images/网络错误404.png"></h1>
+        <h1>出错啦!!!</h1>
+        <p>抱歉,请多尝试一下或返回主页!</p>
+        <p><a class="btn btn-primary btn-lg" th:href="@{/}" role="button">|返回主页|</a></p>
+    </div>
+</div>
+</body>
+</html>

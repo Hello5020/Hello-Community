@@ -41,3 +41,6 @@ spring:
             enabled: true
             config:
               drop-table-allow: false
+mybatis-plus:
+     configuration:
+            log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
