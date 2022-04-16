@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hello.community.bean.Question;
 import com.hello.community.bean.User;
 import com.hello.community.dto.QuestionDTO;
+import com.hello.community.exception.CustomizeErrorCode;
+import com.hello.community.exception.CustomizeException;
 import com.hello.community.mapper.UserMapper;
 import com.hello.community.service.QuestionService;
 import com.hello.community.mapper.QuestionMapper;
@@ -79,6 +81,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     public QuestionDTO getQuestionById(Integer id) {
         QuestionDTO questionDTO = new QuestionDTO();
         Question question = getById(id);
+        if (question == null) {
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         User user = userService.getUserById(question.getCreator());
         BeanUtils.copyProperties(question,questionDTO);
         questionDTO.setUser(user);
@@ -90,6 +95,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         if(question.getId() == null){
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModifie(question.getGmtCreate());
+            question.setViewCount(0);
+            question.setCommentCount(0);
+            question.setLikeCount(0);
             create(question);
         }else{
             question.setGmtModifie(question.getGmtCreate());
@@ -101,7 +109,15 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     public void incView(Integer id) {
         Question question = getById(id);
         question.setViewCount(1);
-        questionMapper.updateViewCountById(question);
+        int i = questionMapper.updateViewCountById(question);
+        if (i == 0) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
+    }
+
+    @Override
+    public void incCommentCount(Question question) {
+        questionMapper.updateCommentCountById(question);
     }
 
 }

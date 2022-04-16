@@ -22,4 +22,5 @@ public interface QuestionService extends IService<Question> {
     QuestionDTO getQuestionById(Integer id);
     void createOrUpdate(Question question);
     void incView(Integer id);
+    void incCommentCount(Question question);
 }

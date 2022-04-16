@@ -50,5 +50,10 @@
         set view_count = view_count+#{viewCount,jdbcType=NUMERIC}
         where id = #{id,jdbcType=NUMERIC}
     </update>
+    <update id="updateCommentCountById">
+        update question
+        set comment_count = comment_count + #{commentCount,jdbcType=NUMERIC}
+        where id = #{id,jdbcType=NUMERIC}
+    </update>
 
 </mapper>
