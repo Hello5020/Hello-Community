@@ -38,6 +38,19 @@ body{
 .jumbotron{
     margin: 50px;
 }
+.media-body{
+    padding-top: 10px;
+}
+.comment{
+    margin: 10px 0;
+}
+.btn-comment{
+    float: right;
+    margin-bottom: 10px;
+}
+/*                                         */
+/*            图标                          */
+/*                                         */
 @font-face {
     font-family: "iconfont"; /* Project id 3317276 */
     src: url('//at.alicdn.com/t/font_3317276_wvpvwpbt7yg.woff2?t=1649848499181') format('woff2'),
