@@ -21,11 +21,38 @@
                     </span>
                <hr style="border:double #777777;">
                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div><br>
-               <hr style="border:1px dashed #000;">
-               <a th:href="@{'/publish/'+${question.id}}" class="community-menu" th:if="${session.loginUser != null && session.loginUser.id == question.creator}">
+               <hr style="border:double #777777;">
+               <a th:href="@{'/publish/'+${question.id}}" class="community-menu pull-right" th:if="${session.loginUser != null && session.loginUser.id == question.creator}">
                    <span class="iconfont icon-bianji_" aria-hidden="true"></span>编辑
                </a>
-           </div>
+           </div><br>
+
+            <h4>
+                <span th:text="${question.commentCount}"></span> 个回复
+            </h4>
+            <hr style="border:1px dashed #000;" class="comment-sp">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comments" th:each="comment :${comments}">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object img-thumbnail"
+                                 th:src="@{${comment.user.avatarUrl}}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h5 class="media-heading media-body">
+                            <span th:text="${comment.user.name}"></span>
+                        </h5>
+                        <div class="huifu" th:text="${comment.content}">回复内容</div>
+                        <div class="comment-div menu">
+                            <span class="iconfont icon-icon icon-size" aria-hidden="true"></span>
+                            <span class="iconfont icon-pinglun icon-size" aria-hidden="true"></span>
+                            <span class="pull-right" th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd')}"></span><br>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
             <hr style="border:1px dashed #000;">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="comment_section">

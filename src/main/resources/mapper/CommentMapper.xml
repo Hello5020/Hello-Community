@@ -20,4 +20,8 @@
         commentator,gmt_create,gmt_modified,
         like_count,content
     </sql>
+    <select id="selectList" resultType="com.hello.community.bean.Comment">
+        select * from comment ${ew.customSqlSegment}
+    </select>
+
 </mapper>

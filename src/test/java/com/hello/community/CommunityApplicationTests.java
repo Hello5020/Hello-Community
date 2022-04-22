@@ -2,7 +2,9 @@ package com.hello.community;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Question;
+import com.hello.community.dto.CommentDTO;
 import com.hello.community.mapper.QuestionMapper;
+import com.hello.community.service.CommentService;
 import com.hello.community.service.QuestionService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,9 @@ class CommunityApplicationTests {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    CommentService commentService;
 
     @Test
     void contextLoads() {
@@ -44,4 +49,9 @@ class CommunityApplicationTests {
         questionMapper.updateViewCountById(question);
     }
 
+    @Test
+    public void test1(){
+        List<CommentDTO> commentDTOS = commentService.listByQuestionId(1, 1, 8);
+        commentDTOS.forEach(System.out::println);
+    }
 }

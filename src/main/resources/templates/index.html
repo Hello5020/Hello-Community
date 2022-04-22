@@ -5,6 +5,15 @@
     <div th:include="common :: commonheader"></div>
     <link rel="stylesheet" th:href="@{/css/community.css}"/>
 </head>
+<script type="application/javascript">
+    window.onload = function (){
+        var item = window.localStorage.getItem("closeable");
+        if (item == "true"){
+            window.close();
+            window.localStorage.removeItem("closeable");
+        }
+    }
+    </script>
 <body>
 <nav class="navbar navbar-default">
     <div th:replace="common :: headermenu"></div>

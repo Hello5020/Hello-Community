@@ -48,14 +48,39 @@ body{
     float: right;
     margin-bottom: 10px;
 }
+.comment-sp{
+    margin-top: 0;
+}
+.comment-div{
+    margin-bottom: 15px;
+}
+.icon-size{
+    margin-right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.icon-size:hover{
+    color: lightskyblue;
+}
+.menu{
+    margin-top: 5px;
+    color: #999999;
+}
+.huifu{
+    margin-top: 15px;
+}
+.comments{
+    margin-bottom: 15px;
+    border-bottom: 1px solid #8c8c8c;
+}
 /*                                         */
 /*            图标                          */
 /*                                         */
 @font-face {
     font-family: "iconfont"; /* Project id 3317276 */
-    src: url('//at.alicdn.com/t/font_3317276_wvpvwpbt7yg.woff2?t=1649848499181') format('woff2'),
-    url('//at.alicdn.com/t/font_3317276_wvpvwpbt7yg.woff?t=1649848499181') format('woff'),
-    url('//at.alicdn.com/t/font_3317276_wvpvwpbt7yg.ttf?t=1649848499181') format('truetype');
+    src: url('//at.alicdn.com/t/font_3317276_dpiutb89be.woff2?t=1650620577484') format('woff2'),
+    url('//at.alicdn.com/t/font_3317276_dpiutb89be.woff?t=1650620577484') format('woff'),
+    url('//at.alicdn.com/t/font_3317276_dpiutb89be.ttf?t=1650620577484') format('truetype');
 }
 
 .iconfont {
@@ -63,6 +88,14 @@ body{
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon:before {
+    content: "\e651";
+}
+
+.icon-pinglun:before {
+    content: "\e632";
 }
 
 .icon-bianji_:before {
@@ -96,4 +129,5 @@ body{
 .icon-viewlist:before {
     content: "\e6b5";
 }
+
 

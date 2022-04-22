@@ -1,17 +1,30 @@
 package com.hello.community.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hello.community.bean.Comment;
 import com.hello.community.bean.Question;
+import com.hello.community.bean.User;
+import com.hello.community.dto.CommentDTO;
 import com.hello.community.enums.CommentTypeEnum;
 import com.hello.community.exception.CustomizeErrorCode;
 import com.hello.community.exception.CustomizeException;
+import com.hello.community.mapper.UserMapper;
 import com.hello.community.service.CommentService;
 import com.hello.community.mapper.CommentMapper;
 import com.hello.community.service.QuestionService;
+import com.hello.community.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
 * @author 25047
@@ -27,6 +40,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
 
     @Autowired
     CommentMapper commentMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     @Transactional
@@ -54,6 +70,34 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
             questionService.incCommentCount(question);
         }
 
+    }
+
+    @Override
+    public List<CommentDTO> listByQuestionId(Integer id,Integer page, Integer size) {
+        Page<Comment> pages = new Page<>(1,5);
+        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("parent_id",id)
+                .eq("type",CommentTypeEnum.Question.getType());
+        Page<Comment> commentPage = commentMapper.selectList(pages,queryWrapper);
+        List<Comment> comments = commentPage.getRecords();
+        if (comments.size() == 0) {
+            return new ArrayList<>();
+        }
+        Set<Integer> commentators = comments.stream().map(comment -> comment.getCommentator())
+                .collect(Collectors.toSet());
+        List<Integer> userIds = new ArrayList<>();
+        userIds.addAll(commentators);
+        List<User> users = userMapper.selectBatchIds(userIds);
+        Map<Integer, User> userMap = users.stream().collect(Collectors.toMap(user -> user.getId(), user -> user));
+
+        List<CommentDTO> commentDTOList = comments.stream().map(comment -> {
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(comment,commentDTO);
+            commentDTO.setUser(userMap.get(comment.getCommentator()));
+            return commentDTO;
+        }).collect(Collectors.toList());
+
+        return commentDTOList;
     }
 }
 

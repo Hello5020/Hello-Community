@@ -1,8 +1,15 @@
 package com.hello.community.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Comment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.hello.community.bean.Question;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
 * @author 25047
@@ -13,6 +20,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CommentMapper extends BaseMapper<Comment> {
 
+    Page<Comment> selectList(@Param("page") Page<Comment> page,@Param(Constants.WRAPPER)Wrapper<Comment> queryWrapper);
 }
 
 
