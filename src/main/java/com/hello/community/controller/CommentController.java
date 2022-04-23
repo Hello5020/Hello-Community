@@ -6,6 +6,7 @@ import com.hello.community.dto.CommentCreateDTO;
 import com.hello.community.dto.ResultDTO;
 import com.hello.community.exception.CustomizeErrorCode;
 import com.hello.community.service.CommentService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +30,10 @@ public class CommentController {
         if (user == null) {
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
+
+        if(commentDTO == null || StringUtils.isBlank(commentDTO.getContent())){
+            return ResultDTO.errorOf(CustomizeErrorCode.COMMENT_IS_EMPTY);
+        }
         Comment entity = new Comment();
         entity.setContent(commentDTO.getContent());
         entity.setParentId(commentDTO.getParentId());
@@ -36,7 +41,7 @@ public class CommentController {
         entity.setGmtModified(System.currentTimeMillis());
         entity.setGmtCreate(System.currentTimeMillis());
         entity.setCommentator(1);
-        commentService.save(entity);
+        commentService.saveAndCheck(entity);
         return ResultDTO.successOf();
     }
 

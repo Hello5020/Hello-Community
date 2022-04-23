@@ -50,6 +50,10 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.5.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
         <!--连接数据库-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

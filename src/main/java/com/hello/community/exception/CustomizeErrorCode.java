@@ -7,7 +7,8 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode{
     COMMENT_PARAM_NOT_FOUND(5002,"未选中评论目标!"),
     NO_LOGIN(5003,"登陆异常!"),
     TYPE_PARAMS_WRONG(5005,"评论类型错误!"),
-    COMMENT_NOT_FOUND(5004,"操作评论不存在!");
+    COMMENT_NOT_FOUND(5004,"操作评论不存在!"),
+    COMMENT_IS_EMPTY(5006,"评论不能为空!");
 
     private Integer code;
 

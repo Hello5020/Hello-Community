@@ -117,6 +117,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
 
     @Override
     public void incCommentCount(Question question) {
+        question.setCommentCount(1);
         questionMapper.updateCommentCountById(question);
     }
 

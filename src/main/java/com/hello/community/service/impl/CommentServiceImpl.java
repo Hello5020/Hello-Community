@@ -66,7 +66,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
             save(comment);
-            question.setCommentCount(1);
             questionService.incCommentCount(question);
         }
 
@@ -77,7 +76,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
         Page<Comment> pages = new Page<>(1,5);
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_id",id)
-                .eq("type",CommentTypeEnum.Question.getType());
+                .eq("type",CommentTypeEnum.Question.getType()).orderByDesc("gmt_create");
         Page<Comment> commentPage = commentMapper.selectList(pages,queryWrapper);
         List<Comment> comments = commentPage.getRecords();
         if (comments.size() == 0) {
