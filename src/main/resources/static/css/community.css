@@ -62,6 +62,9 @@ body{
 .icon-size:hover{
     color: lightskyblue;
 }
+.active{
+    color: lightskyblue;
+}
 .menu{
     margin-top: 5px;
     color: #999999;
@@ -73,6 +76,17 @@ body{
     margin-bottom: 15px;
     border-bottom: 1px solid #8c8c8c;
 }
+.sub-comments{
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px #494746;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+.sub-comments .btn {
+    margin: 15px 0;
+}
+
 .zz{
     font-size: 25px;
     color: darkviolet;

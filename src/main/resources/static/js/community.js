@@ -1,3 +1,6 @@
+/**
+ * 提交回复
+ */
 function post(){
     var questionId = $("#question_id").val();
     var content = $("#comment_content").val();
@@ -33,4 +36,23 @@ function post(){
         },
         dataType: "json"
     });
+}
+
+/**
+ * 二级评论
+ */
+function collapseComments(e) {
+    var id = e.getAttribute("data-id");
+    var commments = $("#comment-"+id);
+
+    var collapse = e.getAttribute("data-collapse");
+    if (collapse){
+        commments.removeClass("in");
+        e.removeAttribute("data-collapse");
+        e.classList.remove("active");
+    }else {
+        commments.addClass("in");
+        e.setAttribute("data-collapse","in");
+        e.classList.add("active");
+    }
 }
