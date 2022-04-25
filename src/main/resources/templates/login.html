@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <div th:include="common :: commonheader"></div>
+    <link rel="stylesheet" th:href="@{/css/community.css}"/>
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    <div class="login-box">
+        <h1>登陆</h1>
+        <div>
+            <form method="post" th:action="@{/login}" class="input-box">
+                <label style="color: red" th:text="${msg}"></label>
+                <div class="input-text">
+                    <span class='iconfont icon-mine'></span>
+                    <input  name="name" type="text" placeholder="用户名">
+                </div>
+                <div class="input-text">
+                    <span class='iconfont icon-lock'></span>
+                    <input type="password" name="password" placeholder="密码">
+                </div>
+                <button id="pass_word" class="input-btn" type="submit" >登录</button>
+                <div class="sign-up">
+                    还没账户？<a href="#">立即注册</a>
+                </div>
+            </form>
+        </div>
+        <div class="sign-up">
+            <span style="margin: 10px;color: aliceblue;">其他登陆方式:</span>
+            <a href="https://github.com/login/oauth/authorize?client_id=fd6e83c078c4d597be9a&redirect_uri=http://localhost:8889/callback&scope=user&state=1"
+               style="color: #222222">
+                <span class="iconfont icon-github" aria-hidden="true" style="font-size: 25px;"></span>
+            </a>
+    </div>
+    </div>
+</body>
+</html>

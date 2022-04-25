@@ -53,6 +53,11 @@ public class User implements Serializable {
     /**
      * 
      */
+    private String password;
+
+    /**
+     * 
+     */
     private String avatarUrl;
 
     @TableField(exist = false)

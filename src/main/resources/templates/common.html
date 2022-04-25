@@ -49,7 +49,7 @@
                 </ul>
             </li>
             <li th:if="${session.loginUser == null}">
-                <a href="https://github.com/login/oauth/authorize?client_id=fd6e83c078c4d597be9a&redirect_uri=http://localhost:8889/callback&scope=user&state=1">登录</a>
+                <a th:href="@{/login}">登录</a>
             </li>
         </ul>
     </div><!-- /.navbar-collapse -->
