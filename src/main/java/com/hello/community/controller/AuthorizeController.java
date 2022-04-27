@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.*;
@@ -75,5 +77,32 @@ public class AuthorizeController {
         cookie.setMaxAge(0);
         response.addCookie(cookie);
         return "redirect:/";
+    }
+
+    @PostMapping("/create")
+    public String createUser(User user,
+                             @RequestParam("checkPassword")String pwd,
+                             Model model){
+        model.addAttribute("name",user.getName());
+        model.addAttribute("password",user.getPassword());
+        model.addAttribute("check",pwd);
+        if (user.getName().isEmpty()) {
+            model.addAttribute("msg","用户名不能为空!");
+            return checkUser(model);
+        }else if (user.getPassword().isEmpty()) {
+            model.addAttribute("msg","密码不能为空!");
+            return checkUser(model);
+        }else if(pwd.isEmpty()){
+            model.addAttribute("msg","请确认密码!");
+            return checkUser(model);
+        }else if (!pwd.equals(user.getPassword())){
+            model.addAttribute("msg","确认密码与密码不同!");
+            return checkUser(model);
+        }
+        return "redirect:/login";
+    }
+    @GetMapping("/create")
+    public String checkUser(Model model){
+        return "signup";
     }
 }

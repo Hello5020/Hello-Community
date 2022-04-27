@@ -11,8 +11,14 @@
     <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 <body>
+        <nav class="navbar navbar-default headm">
+            <div  th:replace="common :: headermenu1" ></div>
+        </nav>
     <div class="login-box">
-        <h1>登陆</h1>
+        <h1><span class="iconfont icon-denglu" aria-hidden="true"
+                  style="color: yellow;font-size: 31px;margin-right: 5px;"></span>
+            登陆
+        </h1>
         <div>
             <form method="post" th:action="@{/login}" class="input-box">
                 <label style="color: red" th:text="${msg}"></label>
@@ -24,11 +30,11 @@
                     <span class='iconfont icon-lock'></span>
                     <input type="password" name="password" placeholder="密码">
                 </div>
-                <button id="pass_word" class="input-btn" type="submit" >登录</button>
-                <div class="sign-up">
-                    还没账户？<a href="#">立即注册</a>
-                </div>
+                <button class="input-btn" type="submit" >登录</button>
             </form>
+            <div class="sign-up" style="margin-left: 180px;color: aquamarine;">
+                还没账户？<a th:href="@{/create}" style="color: aqua;">立即注册</a>
+            </div>
         </div>
         <div class="sign-up">
             <span style="margin: 10px;color: aliceblue;">其他登陆方式:</span>

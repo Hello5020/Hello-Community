@@ -103,9 +103,9 @@ body{
 /*                                         */
 @font-face {
     font-family: "iconfont"; /* Project id 3317276 */
-    src: url('//at.alicdn.com/t/font_3317276_7ipu8zn3yyu.woff2?t=1650884939510') format('woff2'),
-    url('//at.alicdn.com/t/font_3317276_7ipu8zn3yyu.woff?t=1650884939510') format('woff'),
-    url('//at.alicdn.com/t/font_3317276_7ipu8zn3yyu.ttf?t=1650884939510') format('truetype');
+    src: url('//at.alicdn.com/t/font_3317276_jj0x9z1pflh.woff2?t=1651063171533') format('woff2'),
+    url('//at.alicdn.com/t/font_3317276_jj0x9z1pflh.woff?t=1651063171533') format('woff'),
+    url('//at.alicdn.com/t/font_3317276_jj0x9z1pflh.ttf?t=1651063171533') format('truetype');
 }
 
 .iconfont {
@@ -113,6 +113,14 @@ body{
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cuowutishitubiao:before {
+    content: "\e6a0";
+}
+
+.icon-zhuce:before {
+    content: "\e6d6";
 }
 
 .icon-denglu:before {
