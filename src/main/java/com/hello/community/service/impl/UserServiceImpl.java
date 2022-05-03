@@ -52,6 +52,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
     }
 
+    @Override
+    public User getUserByNameandPassword(String name, String password) {
+        return userMapper.selectByNameAndPassword(name,password);
+    }
+
+    @Override
+    public List<User> getUserByName(String name) {
+        return userMapper.selectByName(name);
+    }
+
 
 }
 

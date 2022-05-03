@@ -40,7 +40,7 @@ public class CommentController {
         entity.setType(commentDTO.getType());
         entity.setGmtModified(System.currentTimeMillis());
         entity.setGmtCreate(System.currentTimeMillis());
-        entity.setCommentator(1);
+        entity.setCommentator(user.getId());
         commentService.saveAndCheck(entity);
         return ResultDTO.successOf();
     }

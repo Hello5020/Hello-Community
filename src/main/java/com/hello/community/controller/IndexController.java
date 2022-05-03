@@ -5,6 +5,7 @@ import com.hello.community.bean.Question;
 import com.hello.community.bean.User;
 import com.hello.community.dto.QuestionDTO;
 import com.hello.community.service.QuestionService;
+import com.hello.community.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,10 @@ public class IndexController {
     @Autowired
     QuestionService questionService;
 
+    @Autowired
+    private UserService userService;
+
+
     @GetMapping("/")
     public String hello(HttpServletRequest request,
                         Model model,
@@ -40,7 +45,7 @@ public class IndexController {
         return "index";
     }
     @GetMapping("/login")
-    public String loginPage(){
+    public String loginPage(Model model){
         return "login";
     }
 
@@ -49,14 +54,34 @@ public class IndexController {
                        HttpSession session,
                        Model model,
                        HttpServletResponse response){
-        if(!StringUtils.isEmpty(user.getName()) && !StringUtils.isEmpty(user.getPassword())){
+        if (session.getAttribute("smsg") != null) {
+            session.removeAttribute("smsg");
+        }
+        model.addAttribute("name",user.getName());
+        model.addAttribute("password",user.getPassword());
+        List<User> userChecks = userService.getUserByName(user.getName());
+        User userCheckAll = userService.getUserByNameandPassword(user.getName(), user.getPassword());
+        if (user.getName() == null || user.getName() == ""
+                || user.getPassword() == "" ||user.getPassword() == null ) {
+            model.addAttribute("msg","用户名或密码不能为空!");
+            return loginPage(model);
+        }
+        if(userChecks.size() == 0){
+            model.addAttribute("msg","用户名输入错误,此用户名用户不存在!");
+            return loginPage(model);
+        }
+        if(userCheckAll!=null){
             session.setAttribute("loginUser",user);
             String token = UUID.randomUUID().toString();
             response.addCookie(new Cookie("token",token));
+            user.setAccountId(userCheckAll.getAccountId());
+            user.setToken(token);
+            userService.insertOrUpdateUser(user);
+            session.setAttribute("smsg","注册成功!");
             return "redirect:/";
         }else {
             model.addAttribute("msg","账号密码错误!");
-            return "login";
+            return loginPage(model);
         }
     }
 

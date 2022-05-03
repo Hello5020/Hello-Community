@@ -29,6 +29,11 @@ public interface UserMapper extends BaseMapper<User> {
 
     @Override
     int updateById(User user);
+
+    User selectByNameAndPassword(@Param("name") String name, @Param("password") String password);
+
+    List<User> selectByName(@Param("name") String name);
+
 }
 
 

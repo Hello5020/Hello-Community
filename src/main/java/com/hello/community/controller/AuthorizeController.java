@@ -99,10 +99,19 @@ public class AuthorizeController {
             model.addAttribute("msg","确认密码与密码不同!");
             return checkUser(model);
         }
+        user.setAccountId(gen());
+        userService.insertOrUpdateUser(user);
+        model.addAttribute("smsg","注册成功!");
         return "redirect:/login";
+    }
+    public String gen() {
+        UUID uuid = UUID.randomUUID();
+        String strUUID = uuid.toString();
+        return strUUID;
     }
     @GetMapping("/create")
     public String checkUser(Model model){
         return "signup";
     }
+
 }

@@ -97,12 +97,12 @@
                     <div class="media-left">
                         <a href="#">
                             <img class="media-object img-thumbnail"
-                                 th:src="@{${question.user.avatarUrl}}">
+                                 th:src="@{${session.loginUser.avatarUrl}}">
                         </a>
                     </div>
                     <div class="media-body">
                         <h5 class="media-heading media-body">
-                            <span th:text="${question.user.name}"></span>
+                            <span th:text="${session.loginUser.name}"></span>
                         </h5>
                     </div>
                 </div>

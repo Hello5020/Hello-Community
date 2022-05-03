@@ -38,4 +38,19 @@
     <update id="updateById">
         update user set `name` = #{name},token=#{token},gmt_modified = #{gmtModified},avatar_url = #{avatarUrl} where id = #{id}
     </update>
+    <select id="selectByNameAndPassword" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where
+        name = #{name,jdbcType=VARCHAR}
+        AND password = #{password,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where
+        name = #{name,jdbcType=VARCHAR}
+    </select>
 </mapper>

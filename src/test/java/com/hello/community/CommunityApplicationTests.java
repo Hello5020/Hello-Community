@@ -6,12 +6,14 @@ import com.hello.community.dto.CommentDTO;
 import com.hello.community.mapper.QuestionMapper;
 import com.hello.community.service.CommentService;
 import com.hello.community.service.QuestionService;
+import com.hello.community.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @SpringBootTest
@@ -26,6 +28,9 @@ class CommunityApplicationTests {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    UserService userService;
 
     @Test
     void contextLoads() {
@@ -57,6 +62,13 @@ class CommunityApplicationTests {
 
     @Test
     public void test2(){
+            UUID uuid = UUID.randomUUID();
+            String strUUID = uuid.toString();
+            System.out.println(strUUID);
+    }
 
+    @Test
+    public void test3(){
+        System.out.println(userService.getUserByName("test"));
     }
 }

@@ -20,4 +20,8 @@ public interface UserService extends IService<User> {
     User getUserById(Integer id);
 
     void insertOrUpdateUser(User user);
+
+    User getUserByNameandPassword(String name,String password);
+
+    List<User> getUserByName(String name);
 }
