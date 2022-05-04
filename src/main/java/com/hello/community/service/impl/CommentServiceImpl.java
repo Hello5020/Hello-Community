@@ -14,7 +14,6 @@ import com.hello.community.mapper.UserMapper;
 import com.hello.community.service.CommentService;
 import com.hello.community.mapper.CommentMapper;
 import com.hello.community.service.QuestionService;
-import com.hello.community.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,12 +70,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
 
     }
 
+
+
     @Override
-    public List<CommentDTO> listByQuestionId(Integer id,Integer page, Integer size) {
-        Page<Comment> pages = new Page<>(1,5);
+    public List<CommentDTO> listByTargetId(Integer id, Integer page, Integer size, CommentTypeEnum type) {
+        Page<Comment> pages = new Page<>(page,size);
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("parent_id",id)
-                .eq("type",CommentTypeEnum.Question.getType()).orderByDesc("gmt_create");
+                .eq("type",type.getType()).orderByDesc("gmt_create");
         Page<Comment> commentPage = commentMapper.selectList(pages,queryWrapper);
         List<Comment> comments = commentPage.getRecords();
         if (comments.size() == 0) {

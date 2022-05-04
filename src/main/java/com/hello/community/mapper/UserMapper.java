@@ -34,6 +34,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     List<User> selectByName(@Param("name") String name);
 
+
 }
 
 

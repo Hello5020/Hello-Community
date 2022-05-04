@@ -4,9 +4,17 @@
 function post(){
     var questionId = $("#question_id").val();
     var content = $("#comment_content").val();
+  target(questionId,1,content);
+}
+function comment(e) {
+    var commentId = e.getAttribute("data-id");
+    var content = $("#input-"+commentId).val();
+        target(commentId,2,content);
+}
+function target(targetId,type,content) {
     if (!content){
-     alert("不能回复空内容!");
-     return;
+        alert("不能回复空内容!");
+        return;
     }
 
     $.ajax({
@@ -14,9 +22,9 @@ function post(){
         url: "/comment",
         contentType:"application/json",
         data: JSON.stringify({
-            "parentId": questionId,
+            "parentId": targetId,
             "content": content,
-            "type": 1
+            "type": type
         }),
         success: function (response) {
             if (response.code == 5200){
@@ -25,7 +33,7 @@ function post(){
                 if(response.code == 5003){
                     var isAccepted = confirm(response.message);
                     if (isAccepted){
-                        window.open("https://github.com/login/oauth/authorize?client_id=fd6e83c078c4d597be9a&redirect_uri=http://localhost:8889/callback&scope=user&state=1");
+                        window.open("/login");
                         window.localStorage.setItem("closeable",true);
                     }
                 }else {
@@ -51,9 +59,12 @@ function collapseComments(e) {
         e.removeAttribute("data-collapse");
         e.classList.remove("active");
     }else {
-        commments.addClass("in");
-        e.setAttribute("data-collapse","in");
-        e.classList.add("active");
+        $.getJSON("/comment/"+id,function (data) {
+            console.log(data);
+            commments.addClass("in");
+            e.setAttribute("data-collapse","in");
+            e.classList.add("active");
+        })
     }
 }
 

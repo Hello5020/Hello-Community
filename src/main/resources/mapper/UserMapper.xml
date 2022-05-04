@@ -40,7 +40,7 @@
     </update>
     <select id="selectByNameAndPassword" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        *
         from user
         where
         name = #{name,jdbcType=VARCHAR}

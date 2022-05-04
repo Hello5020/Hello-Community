@@ -82,7 +82,8 @@ public class AuthorizeController {
     @PostMapping("/create")
     public String createUser(User user,
                              @RequestParam("checkPassword")String pwd,
-                             Model model){
+                             Model model,
+                             HttpSession session){
         model.addAttribute("name",user.getName());
         model.addAttribute("password",user.getPassword());
         model.addAttribute("check",pwd);
@@ -101,7 +102,7 @@ public class AuthorizeController {
         }
         user.setAccountId(gen());
         userService.insertOrUpdateUser(user);
-        model.addAttribute("smsg","注册成功!");
+        session.setAttribute("smsg","注册成功!");
         return "redirect:/login";
     }
     public String gen() {

@@ -71,13 +71,13 @@ public class IndexController {
             return loginPage(model);
         }
         if(userCheckAll!=null){
-            session.setAttribute("loginUser",user);
             String token = UUID.randomUUID().toString();
             response.addCookie(new Cookie("token",token));
             user.setAccountId(userCheckAll.getAccountId());
             user.setToken(token);
+            user.setAvatarUrl(userCheckAll.getAvatarUrl());
             userService.insertOrUpdateUser(user);
-            session.setAttribute("smsg","注册成功!");
+            session.setAttribute("loginUser",user);
             return "redirect:/";
         }else {
             model.addAttribute("msg","账号密码错误!");

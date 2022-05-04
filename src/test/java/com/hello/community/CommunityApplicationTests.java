@@ -56,8 +56,7 @@ class CommunityApplicationTests {
 
     @Test
     public void test1(){
-        List<CommentDTO> commentDTOS = commentService.listByQuestionId(1, 1, 8);
-        commentDTOS.forEach(System.out::println);
+
     }
 
     @Test

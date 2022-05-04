@@ -2,9 +2,9 @@ package com.hello.community.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Comment;
-import com.hello.community.bean.Question;
 import com.hello.community.dto.CommentDTO;
 import com.hello.community.dto.QuestionDTO;
+import com.hello.community.enums.CommentTypeEnum;
 import com.hello.community.service.CommentService;
 import com.hello.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class QuestionController {
         Integer size = 8;
         Page<Comment> pages = new Page<>(page, size);
         Page<Comment> page1 = commentService.page(pages, null);
-        List<CommentDTO> comments = commentService.listByQuestionId(id,page,size);
+        List<CommentDTO> comments = commentService.listByTargetId(id,page,size,CommentTypeEnum.Question);
         model.addAttribute("question",question);
         model.addAttribute("comments",comments);
         return "question";

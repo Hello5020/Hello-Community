@@ -2,8 +2,8 @@ package com.hello.community.service;
 
 import com.hello.community.bean.Comment;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.hello.community.dto.CommentCreateDTO;
 import com.hello.community.dto.CommentDTO;
+import com.hello.community.enums.CommentTypeEnum;
 
 import java.util.List;
 
@@ -16,5 +16,6 @@ public interface CommentService extends IService<Comment> {
 
     void saveAndCheck(Comment comment);
 
-    List<CommentDTO> listByQuestionId(Integer id,Integer page, Integer size);
+    List<CommentDTO> listByTargetId(Integer id, Integer page, Integer size, CommentTypeEnum type);
+
 }
