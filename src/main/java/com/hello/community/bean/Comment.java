@@ -55,6 +55,11 @@ public class Comment implements Serializable {
      */
     private String content;
 
+    /**
+     * 
+     */
+    private Integer commentCount;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

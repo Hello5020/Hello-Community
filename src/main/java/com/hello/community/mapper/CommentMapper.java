@@ -21,6 +21,8 @@ import java.util.List;
 public interface CommentMapper extends BaseMapper<Comment> {
 
     Page<Comment> selectList(@Param("page") Page<Comment> page,@Param(Constants.WRAPPER)Wrapper<Comment> queryWrapper);
+
+    int updateCommentCountById(Comment comment);
 }
 
 

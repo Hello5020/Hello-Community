@@ -59,12 +59,57 @@ function collapseComments(e) {
         e.removeAttribute("data-collapse");
         e.classList.remove("active");
     }else {
-        $.getJSON("/comment/"+id,function (data) {
-            console.log(data);
+        var subCommentContainer = $("#comment-"+id);
+        if (subCommentContainer.children().length != 1){
             commments.addClass("in");
             e.setAttribute("data-collapse","in");
             e.classList.add("active");
-        })
+        }else {
+            $.getJSON("/comment/"+id,function (data) {
+                $.each(data.data.reverse(),function (index,comment) {
+                    console.log(comment);
+                    var avatarElement = $("<img/>",{
+                        "class": "media-object img-thumbnail",
+                        "src":comment.user.avatarUrl
+                    });
+                    var mediaLeftElement = $("<div/>",{
+                        "class": "media-left"
+                    });
+                    var $h5 = $("<h5/>", {
+                        "class": "media-heading media-body",
+                        "html": comment.user.name
+                    });
+                    var  mediaBodyElement = $("<div/>",{
+                        "class": "media-body"
+                    });
+                    var menu = $("<div/>",{
+                        "class": "comment-div menu"
+                    });
+                    menu.append($("<span/>",{
+                        "class": "pull-right",
+                        "html": moment(comment.gmtCreate).format("YYYY-MM-DD")
+                    }));
+                    mediaBodyElement.append($h5).append($("<div/>",{
+                        "class": "huifu",
+                        "html":comment.content
+                    })).append(menu);
+                    mediaLeftElement.append(avatarElement);
+                    var mediaElement = $("<div/>",{
+                        "class": "media"
+                    })
+                    mediaElement.append(mediaLeftElement).append(mediaBodyElement);
+                    var contentElement = $("<div/>", {
+                        "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 comments"
+                    });
+
+                    contentElement.append(mediaElement);
+                    subCommentContainer.prepend(contentElement);
+                });
+                commments.addClass("in");
+                e.setAttribute("data-collapse","in");
+                e.classList.add("active");
+            });
+        }
     }
 }
 

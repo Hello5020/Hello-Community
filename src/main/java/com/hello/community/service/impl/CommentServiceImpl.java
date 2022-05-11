@@ -59,6 +59,10 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             save(comment);
+            Comment parentComment = new Comment();
+            parentComment.setId(comment.getParentId());
+            parentComment.setCommentCount(1);
+            commentMapper.updateCommentCountById(parentComment);
         }else {
             Question question = questionService.getById(comment.getParentId());
             if (question == null) {

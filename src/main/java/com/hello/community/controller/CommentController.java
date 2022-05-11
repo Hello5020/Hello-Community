@@ -23,6 +23,8 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+
+
     @ResponseBody
     @RequestMapping(value = "/comment",method = RequestMethod.POST)
     public Object post(@RequestBody CommentCreateDTO commentDTO,
