@@ -55,5 +55,11 @@
         set comment_count = comment_count + #{commentCount,jdbcType=NUMERIC}
         where id = #{id,jdbcType=NUMERIC}
     </update>
+    <select id="selectByTag" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from question
+        where id !=#{id} and tag regexp #{tag}
+    </select>
 
 </mapper>

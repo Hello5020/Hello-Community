@@ -1,5 +1,6 @@
 package com.hello.community.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hello.community.bean.Question;
@@ -11,12 +12,15 @@ import com.hello.community.mapper.UserMapper;
 import com.hello.community.service.QuestionService;
 import com.hello.community.mapper.QuestionMapper;
 import com.hello.community.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * @author 25047
@@ -41,7 +45,9 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     @Override
     public List<QuestionDTO> getAll(Integer page,Integer size) {
         Page<Question> pages = new Page<>(page, size);
-        questionMapper.selectPage(pages,null);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.orderByDesc("gmt_create");
+        questionMapper.selectPage(pages,queryWrapper);
         List<Question> questionList = pages.getRecords();
         List<QuestionDTO> questions = new ArrayList<>();
         for (Question question:
@@ -119,6 +125,24 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     public void incCommentCount(Question question) {
         question.setCommentCount(1);
         questionMapper.updateCommentCountById(question);
+    }
+
+    @Override
+    public List<QuestionDTO> getQuestionsByTags(QuestionDTO qu) {
+        if(StringUtils.isBlank(qu.getTag())){
+            return new ArrayList<>();
+        }
+        String[] tag = StringUtils.split(qu.getTag(), ",");
+        String regexpTag = Arrays.stream(tag).collect(Collectors.joining("|"));
+        Question question = new Question();
+        question.setTag(regexpTag);
+        List<Question> questionList = questionMapper.selectByTag(question);
+        List<QuestionDTO> collect = questionList.stream().map(q -> {
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(q,questionDTO);
+            return questionDTO;
+        }).collect(Collectors.toList());
+        return collect;
     }
 
 }

@@ -2,6 +2,12 @@
     background-color: silver;
     margin: 30px;
 }
+.hr1{
+    margin-top: 20px;
+    margin-bottom: 0;
+    border: 0;
+    border-top: 1.5px solid black;
+}
 .index{
     background-color: #f9f2f4;
     margin: 30px;
@@ -103,9 +109,9 @@ body{
 /*                                         */
 @font-face {
     font-family: "iconfont"; /* Project id 3317276 */
-    src: url('//at.alicdn.com/t/font_3317276_jj0x9z1pflh.woff2?t=1651063171533') format('woff2'),
-    url('//at.alicdn.com/t/font_3317276_jj0x9z1pflh.woff?t=1651063171533') format('woff'),
-    url('//at.alicdn.com/t/font_3317276_jj0x9z1pflh.ttf?t=1651063171533') format('truetype');
+    src: url('//at.alicdn.com/t/font_3317276_43uqw1fo0bc.woff2?t=1652364789349') format('woff2'),
+    url('//at.alicdn.com/t/font_3317276_43uqw1fo0bc.woff?t=1652364789349') format('woff'),
+    url('//at.alicdn.com/t/font_3317276_43uqw1fo0bc.ttf?t=1652364789349') format('truetype');
 }
 
 .iconfont {
@@ -113,6 +119,16 @@ body{
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+.icon-biaoqian1:before {
+    content: "\e67e";
+}
+.icon-biaoqian:before {
+    content: "\e62e";
+}
+
+.icon-tag:before {
+    content: "\e612";
 }
 
 .icon-cuowutishitubiao:before {
@@ -182,7 +198,4 @@ body{
 .icon-viewlist:before {
     content: "\e6b5";
 }
-
-
-
 

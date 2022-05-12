@@ -30,6 +30,7 @@ public class QuestionController {
                            @RequestParam(value = "page",defaultValue = "1")Integer page,
                            Model model){
         QuestionDTO question = questionService.getQuestionById(id);
+        List<QuestionDTO> questionsByTags = questionService.getQuestionsByTags(question);
         questionService.incView(id);
         Integer size = 8;
         Page<Comment> pages = new Page<>(page, size);
@@ -37,6 +38,7 @@ public class QuestionController {
         List<CommentDTO> comments = commentService.listByTargetId(id,page,size,CommentTypeEnum.Question);
         model.addAttribute("question",question);
         model.addAttribute("comments",comments);
+        model.addAttribute("questionsByTags",questionsByTags);
         return "question";
     }
 

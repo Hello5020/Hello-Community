@@ -31,6 +31,8 @@ public interface QuestionMapper extends BaseMapper<Question> {
     int updateViewCountById(Question question);
 
     int updateCommentCountById(Question question);
+
+    List<Question> selectByTag(Question question);
 }
 
 

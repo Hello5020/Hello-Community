@@ -1,5 +1,6 @@
 package com.hello.community.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Question;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -23,4 +24,5 @@ public interface QuestionService extends IService<Question> {
     void createOrUpdate(Question question);
     void incView(Integer id);
     void incCommentCount(Question question);
+    List<QuestionDTO> getQuestionsByTags(QuestionDTO question);
 }

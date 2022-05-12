@@ -33,8 +33,7 @@ public class IndexController {
 
 
     @GetMapping("/")
-    public String hello(HttpServletRequest request,
-                        Model model,
+    public String hello(Model model,
                         @RequestParam(value = "page",defaultValue = "1")Integer page){
         Integer size = 8;
         Page<Question> pages = new Page<>(page, size);
@@ -78,7 +77,7 @@ public class IndexController {
             user.setAvatarUrl(userCheckAll.getAvatarUrl());
             userService.insertOrUpdateUser(user);
             session.setAttribute("loginUser",user);
-            return "redirect:/";
+            return hello(model,1);
         }else {
             model.addAttribute("msg","账号密码错误!");
             return loginPage(model);
