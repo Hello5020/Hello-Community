@@ -34,11 +34,12 @@ public class QuestionController {
         questionService.incView(id);
         Integer size = 8;
         Page<Comment> pages = new Page<>(page, size);
-        Page<Comment> page1 = commentService.page(pages, null);
+        Page<Comment> page1 = commentService.get(id,page,size,CommentTypeEnum.Question);
         List<CommentDTO> comments = commentService.listByTargetId(id,page,size,CommentTypeEnum.Question);
         model.addAttribute("question",question);
         model.addAttribute("comments",comments);
         model.addAttribute("questionsByTags",questionsByTags);
+        model.addAttribute("pn",page1);
         return "question";
     }
 

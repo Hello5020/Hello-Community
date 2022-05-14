@@ -1,8 +1,10 @@
 package com.hello.community;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Question;
 import com.hello.community.dto.CommentDTO;
+import com.hello.community.dto.QuestionDTO;
 import com.hello.community.mapper.QuestionMapper;
 import com.hello.community.service.CommentService;
 import com.hello.community.service.QuestionService;
@@ -56,7 +58,10 @@ class CommunityApplicationTests {
 
     @Test
     public void test1(){
-
+        QuestionDTO question = new QuestionDTO();
+        question.setId(1);
+        question.setTag("1,2,3");
+        questionService.getQuestionsByTags(question);
     }
 
     @Test

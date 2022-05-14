@@ -1,5 +1,6 @@
 package com.hello.community.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Comment;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hello.community.dto.CommentDTO;
@@ -17,5 +18,7 @@ public interface CommentService extends IService<Comment> {
     void saveAndCheck(Comment comment);
 
     List<CommentDTO> listByTargetId(Integer id, Integer page, Integer size, CommentTypeEnum type);
+
+    Page<Comment> get(Integer id, Integer page, Integer size, CommentTypeEnum type);
 
 }

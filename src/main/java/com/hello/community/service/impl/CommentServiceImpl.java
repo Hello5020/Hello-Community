@@ -103,6 +103,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
 
         return commentDTOList;
     }
+    @Override
+    public Page<Comment> get(Integer id, Integer page, Integer size, CommentTypeEnum type)
+    {
+        Page<Comment> pages = new Page<>(page,size);
+        QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("parent_id",id)
+                .eq("type",type.getType()).orderByDesc("gmt_create");
+        Page<Comment> commentPage = commentMapper.selectList(pages,queryWrapper);
+        return commentPage;
+    }
 }
 
 

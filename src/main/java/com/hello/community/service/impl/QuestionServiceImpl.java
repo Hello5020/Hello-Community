@@ -135,6 +135,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         String[] tag = StringUtils.split(qu.getTag(), ",");
         String regexpTag = Arrays.stream(tag).collect(Collectors.joining("|"));
         Question question = new Question();
+        question.setId(qu.getId());
         question.setTag(regexpTag);
         List<Question> questionList = questionMapper.selectByTag(question);
         List<QuestionDTO> collect = questionList.stream().map(q -> {
