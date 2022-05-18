@@ -112,4 +112,19 @@ function collapseComments(e) {
         }
     }
 }
-
+function selectTag(value) {
+    var previous = $("#tag").val();
+    if (previous.search(value) == -1){
+        if (previous){
+            $("#tag").val(previous+','+value);
+        }else {
+            $("#tag").val(value);
+        }
+    }
+}
+function showSelectTag() {
+    $("#selectTag").show()
+}
+function hideSelectTag() {
+    $("#selectTag").hide()
+}

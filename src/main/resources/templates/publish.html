@@ -18,7 +18,8 @@
                 <input type="hidden" name="id" th:value="${id}">
                 <div class="form-group">
                     <label for="title">问题标题 (简单描述) :</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="问题标题...." th:value="${title}">
+                    <input type="text" class="form-control" id="title" name="title"
+                           autocomplete="off" placeholder="问题标题...." th:value="${title}">
                 </div>
                 <div class="form-group">
                     <label for="title">问题补充 (必填,请参照右侧提示) :</label>
@@ -26,7 +27,42 @@
                 </div>
                 <div class="form-group">
                     <label for="title">添加标签 :</label>
-                    <input type="text" class="form-control" id="tag" name="tag" placeholder="输入标签,以','分隔" th:value="${tag}">
+                    <input type="text" class="form-control" id="tag" name="tag"
+                           autocomplete="off"
+                           placeholder="输入标签,以','分隔" th:value="${tag}"
+                            onclick="showSelectTag()">
+                        <div id="selectTag" style="display: none">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">开发语言</a></li>
+                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">架构框架</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content"
+                                 style="width: 280px;
+                                 height: auto;
+                                 margin-left: 1px;
+                                 margin-top: 10px;
+                                 border-radius: 5px;">
+                                <div role="tabpanel" class="tab-pane active" id="home">
+                                                  <span class="iconfont  icon-tag tagStyle" aria-hidden="true">
+                                          <span onclick="selectTag('python')">python</span>
+                                      </span>
+                                                <span class="iconfont  icon-tag tagStyle" aria-hidden="true">
+                                          <span onclick="selectTag('java')">java</span>
+                                      </span>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="profile">
+                                               <span class="iconfont  icon-tag tagStyle" aria-hidden="true">
+                                      <span onclick="selectTag('spring')">spring</span>
+                                  </span>
+                                            <span class="iconfont  icon-tag tagStyle" aria-hidden="true">
+                                      <span onclick="selectTag('springboot')">Spring boot</span>
+                                  </span>
+                                </div>
+                            </div>
+                        </div>
                 </div>
                 <div class="container-fluid main">
                     <div class="row">
