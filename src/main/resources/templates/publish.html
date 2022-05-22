@@ -34,23 +34,24 @@
                         <div id="selectTag" style="display: none">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">开发语言</a></li>
-                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">架构框架</a></li>
+                                <li role="presentation" th:each="stag:${tags}">
+                                    <a href="#home" aria-controls="home" role="tab" data-toggle="tab"
+                                       th:text="${stag.categoryName}"
+                                    th:href="${'#'+stag.categoryName}">
+                                    </a>
+                                </li>
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content"
-                                 style="width: 280px;
+                                 style="
                                  height: auto;
                                  margin-left: 1px;
                                  margin-top: 10px;
                                  border-radius: 5px;">
-                                <div role="tabpanel" class="tab-pane active" id="home">
-                                                  <span class="iconfont  icon-tag tagStyle" aria-hidden="true">
-                                          <span onclick="selectTag('python')">python</span>
-                                      </span>
-                                                <span class="iconfont  icon-tag tagStyle" aria-hidden="true">
-                                          <span onclick="selectTag('java')">java</span>
+                                <div role="tabpanel" class="tab-pane" th:id="${stag.categoryName}" th:each="stag:${tags}">
+                                                  <span class="iconfont  icon-tag tagStyle" aria-hidden="true"th:each="selectTag:${stag.tags}">
+                                          <span onclick="selectTag(this)"  th:data-tag="${selectTag}" th:text="${selectTag}">python</span>
                                       </span>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="profile">

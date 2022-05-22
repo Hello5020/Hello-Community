@@ -112,7 +112,8 @@ function collapseComments(e) {
         }
     }
 }
-function selectTag(value) {
+function selectTag(e) {
+    var value = e.getAttribute("data-tag")
     var previous = $("#tag").val();
     if (previous.search(value) == -1){
         if (previous){
