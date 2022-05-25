@@ -104,6 +104,9 @@ body{
 .question-title{
     margin-top: 25px;
 }
+.label-info{
+    white-space: normal;
+}
 .tagStyle {
     /* border: double; */
     /* border-block-color: white; */
@@ -119,9 +122,9 @@ body{
 /*                                         */
 @font-face {
     font-family: "iconfont"; /* Project id 3317276 */
-    src: url('//at.alicdn.com/t/font_3317276_pg8huzgetp8.woff2?t=1652534067795') format('woff2'),
-    url('//at.alicdn.com/t/font_3317276_pg8huzgetp8.woff?t=1652534067795') format('woff'),
-    url('//at.alicdn.com/t/font_3317276_pg8huzgetp8.ttf?t=1652534067795') format('truetype');
+    src: url('//at.alicdn.com/t/font_3317276_ntsue46543e.woff2?t=1653484507784') format('woff2'),
+    url('//at.alicdn.com/t/font_3317276_ntsue46543e.woff?t=1653484507784') format('woff'),
+    url('//at.alicdn.com/t/font_3317276_ntsue46543e.ttf?t=1653484507784') format('truetype');
 }
 
 .iconfont {
@@ -130,6 +133,11 @@ body{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.icon-tongzhi:before {
+    content: "\e604";
+}
+
 .icon-kaifa:before {
     content: "\e6ae";
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hello.community.mapper.NotificationMapper">
+
+    <resultMap id="BaseResultMap" type="com.hello.community.bean.Notification">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="notifier" column="notifier" jdbcType="INTEGER"/>
+            <result property="receiver" column="receiver" jdbcType="INTEGER"/>
+            <result property="outerid" column="outerId" jdbcType="INTEGER"/>
+            <result property="type" column="type" jdbcType="INTEGER"/>
+            <result property="gmtCreate" column="gmt_create" jdbcType="BIGINT"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,notifier,receiver,
+        outerId,type,gmt_create,
+        status
+    </sql>
+</mapper>

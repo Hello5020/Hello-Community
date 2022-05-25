@@ -34,7 +34,7 @@
                         <div id="selectTag" style="display: none">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" th:each="stag:${tags}">
+                                <li role="presentation" th:each="stag,stagStat:${tags}" th:class="${stagStat.first ? 'active':''}">
                                     <a href="#home" aria-controls="home" role="tab" data-toggle="tab"
                                        th:text="${stag.categoryName}"
                                     th:href="${'#'+stag.categoryName}">
@@ -49,18 +49,11 @@
                                  margin-left: 1px;
                                  margin-top: 10px;
                                  border-radius: 5px;">
-                                <div role="tabpanel" class="tab-pane" th:id="${stag.categoryName}" th:each="stag:${tags}">
-                                                  <span class="iconfont  icon-tag tagStyle" aria-hidden="true"th:each="selectTag:${stag.tags}">
+                                <div role="tabpanel" class="tab-pane" th:id="${stag.categoryName}" th:each="stag:${tags}"
+                                     th:class="${stagStat.first ? 'active tab-pane':'tab-pane'}">
+                                                  <span class="iconfont  icon-tag tagStyle label-info" aria-hidden="true"th:each="selectTag:${stag.tags}">
                                           <span onclick="selectTag(this)"  th:data-tag="${selectTag}" th:text="${selectTag}">python</span>
                                       </span>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="profile">
-                                               <span class="iconfont  icon-tag tagStyle" aria-hidden="true">
-                                      <span onclick="selectTag('spring')">spring</span>
-                                  </span>
-                                            <span class="iconfont  icon-tag tagStyle" aria-hidden="true">
-                                      <span onclick="selectTag('springboot')">Spring boot</span>
-                                  </span>
                                 </div>
                             </div>
                         </div>

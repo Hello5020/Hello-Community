@@ -45,6 +45,12 @@
             <li th:if="${session.loginUser != null}">
                 <a class="btn btn-default" th:href="@{/publish}"  role="button">发布</a>
             </li>
+            <li>
+                <a href="/profile/replies" style="margin-right: -15px;">
+                    <span class="iconfont icon-tongzhi" aria-hidden="true"></span>通知
+                    <span class="badge" style="background-color: #e55454;">14</span>
+                </a>
+            </li>
             <li class="dropdown" th:if="${session.loginUser != null}">
                 <a href="#" class="dropdown-toggle"
                    data-toggle="dropdown" role="button"
@@ -54,9 +60,14 @@
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a th:href="@{/profile/questions}">我的话题</a></li>
+                    <li>
+                        <a th:href="@{/profile/questions}">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            我的话题</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">个人资料</a></li>
+                    <li>
+                        <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>个人资料</a>
+                    </li>
                     <li><a th:href="@{/logout}">退出登录</a></li>
                 </ul>
             </li>
