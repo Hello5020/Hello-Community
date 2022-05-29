@@ -19,4 +19,11 @@
         outerId,type,gmt_create,
         status
     </sql>
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        *
+        from notification
+        where
+        receiver = #{receiverId,jdbcType=NUMERIC}
+    </select>
 </mapper>

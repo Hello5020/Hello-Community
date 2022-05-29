@@ -45,7 +45,7 @@
             <li th:if="${session.loginUser != null}">
                 <a class="btn btn-default" th:href="@{/publish}"  role="button">发布</a>
             </li>
-            <li>
+            <li th:if="${session.loginUser != null}">
                 <a href="/profile/replies" style="margin-right: -15px;">
                     <span class="iconfont icon-tongzhi" aria-hidden="true"></span>通知
                     <span class="badge" style="background-color: #e55454;">14</span>
