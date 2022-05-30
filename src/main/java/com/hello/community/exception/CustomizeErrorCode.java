@@ -8,7 +8,9 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode{
     NO_LOGIN(5003,"登陆异常!"),
     TYPE_PARAMS_WRONG(5005,"评论类型错误!"),
     COMMENT_NOT_FOUND(5004,"操作评论不存在!"),
-    COMMENT_IS_EMPTY(5006,"评论不能为空!");
+    COMMENT_IS_EMPTY(5006,"评论不能为空!"),
+    READ_NOTIFICATION_FAIL(5007,"无法读取他人信息!"),
+    NOTIFICATION_NOT_FOUND(5008,"通知离家出走了!");
 
     private Integer code;
 

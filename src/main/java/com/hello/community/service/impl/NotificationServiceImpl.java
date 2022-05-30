@@ -9,6 +9,10 @@ import com.hello.community.bean.User;
 import com.hello.community.dto.NotificationDTO;
 import com.hello.community.dto.QuestionDTO;
 import com.hello.community.enums.NotifitionEnum;
+import com.hello.community.enums.NotifitionTypeEnum;
+import com.hello.community.exception.CustomizeErrorCode;
+import com.hello.community.exception.CustomizeException;
+import com.hello.community.exception.ICustomizeErrorCode;
 import com.hello.community.service.NotificationService;
 import com.hello.community.mapper.NotificationMapper;
 import com.hello.community.service.UserService;
@@ -53,7 +57,7 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
             NotificationDTO notificationDTO = new NotificationDTO();
             BeanUtils.copyProperties(notification,notificationDTO);
             notificationDTO.setNotifier(user);
-            notificationDTO.setType(NotifitionEnum.nameOfType(notification.getType()));
+            notificationDTO.setTypeName(NotifitionEnum.nameOfType(notification.getType()));
             notifications.add(notificationDTO);
         }
         return notifications;
@@ -62,8 +66,28 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
     @Override
     public Long unreadCount(Integer id) {
         QueryWrapper<Notification> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("receiver",id);
+        queryWrapper.eq("receiver",id).eq("status",NotifitionTypeEnum.UNREAD.getStatus());
         return notificationMapper.selectCount(queryWrapper);
+    }
+
+    @Override
+    public NotificationDTO read(Integer id, User user) {
+        QueryWrapper<Notification> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id",id);
+        Notification notification = notificationMapper.selectOne(queryWrapper);
+        if (notification == null) {
+            throw new CustomizeException(CustomizeErrorCode.NOTIFICATION_NOT_FOUND);
+        }
+        if (!notification.getReceiver().equals(user.getId())) {
+            throw new CustomizeException(CustomizeErrorCode.READ_NOTIFICATION_FAIL);
+        }
+        notification.setStatus(NotifitionTypeEnum.READ.getStatus());
+        notificationMapper.updateById(notification);
+        NotificationDTO notificationDTO = new NotificationDTO();
+        BeanUtils.copyProperties(notification,notificationDTO);
+        notificationDTO.setNotifier(user);
+        notificationDTO.setTypeName(NotifitionEnum.nameOfType(notification.getType()));
+        return notificationDTO;
     }
 }
 

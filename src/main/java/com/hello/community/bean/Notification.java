@@ -33,7 +33,7 @@ public class Notification implements Serializable {
     /**
      * 
      */
-    private long outerid;
+    private Long outerid;
 
     /**
      * 

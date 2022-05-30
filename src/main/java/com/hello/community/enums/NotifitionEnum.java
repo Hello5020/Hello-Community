@@ -1,8 +1,8 @@
 package com.hello.community.enums;
 
 public enum NotifitionEnum {
-    REPLY_QUESTION(1,"回复了问题"),
-    REPLY_COMMENT(2,"回复了评论")
+    REPLY_QUESTION(1,"回复了你的问题"),
+    REPLY_COMMENT(2,"回复了你的评论")
     ;
     private int type;
     private String name;

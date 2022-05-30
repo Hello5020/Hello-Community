@@ -81,11 +81,13 @@
             <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" th:if="${section == 'replies'}">
                 <div class="media" th:each="notification : ${notifications}">
                     <div class="media-body">
-                        <a th:href="@{'/notification/'+${notification.id}}">
-                            <h5 class="media-heading"
-                                th:text="${notification.notifier.name +' '+ notification.type + ' '+ notification.outerTitle}">
-                            </h5>
+                        <p class="media-heading">
+                            <span th:text="${notification.notifier.name +' '+ notification.typeName + ' '}"></span>
+                        <a th:href="@{'/notification/'+${notification.id}}"
+                           th:text="${notification.outerTitle}">
                         </a>
+                            <span class="label label-danger" th:if="${notification.status == 0}"> 未读</span>
+                        </p>
                     </div>
                 </div>
                 <nav aria-label="Page navigation" >
