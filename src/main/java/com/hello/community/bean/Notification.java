@@ -33,7 +33,7 @@ public class Notification implements Serializable {
     /**
      * 
      */
-    private Integer outerid;
+    private long outerid;
 
     /**
      * 
@@ -49,6 +49,11 @@ public class Notification implements Serializable {
      * 
      */
     private Integer status;
+
+    /**
+     * 
+     */
+    private String outerTitle;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

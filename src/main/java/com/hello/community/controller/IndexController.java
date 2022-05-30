@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hello.community.bean.Question;
 import com.hello.community.bean.User;
 import com.hello.community.dto.QuestionDTO;
+import com.hello.community.service.NotificationService;
 import com.hello.community.service.QuestionService;
 import com.hello.community.service.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +31,6 @@ public class IndexController {
 
     @Autowired
     private UserService userService;
-
 
     @GetMapping("/")
     public String hello(Model model,

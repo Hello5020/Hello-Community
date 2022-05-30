@@ -4,15 +4,19 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hello.community.bean.Comment;
+import com.hello.community.bean.Notification;
 import com.hello.community.bean.Question;
 import com.hello.community.bean.User;
 import com.hello.community.dto.CommentDTO;
 import com.hello.community.enums.CommentTypeEnum;
+import com.hello.community.enums.NotifitionEnum;
+import com.hello.community.enums.NotifitionTypeEnum;
 import com.hello.community.exception.CustomizeErrorCode;
 import com.hello.community.exception.CustomizeException;
 import com.hello.community.mapper.UserMapper;
 import com.hello.community.service.CommentService;
 import com.hello.community.mapper.CommentMapper;
+import com.hello.community.service.NotificationService;
 import com.hello.community.service.QuestionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +47,13 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    NotificationService notificationService;
+
     @Override
     @Transactional
     public void saveAndCheck(Comment comment) {
+        Question question = questionService.getById(comment.getParentId());
         if (comment.getParentId() == null || comment.getParentId() == 0) {
             throw new CustomizeException(CustomizeErrorCode.COMMENT_PARAM_NOT_FOUND);
         }
@@ -63,17 +71,29 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
             parentComment.setId(comment.getParentId());
             parentComment.setCommentCount(1);
             commentMapper.updateCommentCountById(parentComment);
+            Integer receiver = dbComment.getCommentator();
+            createNotify(comment, receiver,NotifitionEnum.REPLY_COMMENT,question.getTitle()+"的回复");
         }else {
-            Question question = questionService.getById(comment.getParentId());
             if (question == null) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
             save(comment);
             questionService.incCommentCount(question);
+            createNotify(comment,question.getCreator(),NotifitionEnum.REPLY_QUESTION,question.getTitle());
         }
-
     }
 
+    private void createNotify(Comment comment, Integer receiver, NotifitionEnum replyComment,String Title) {
+        Notification notification = new Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setType(replyComment.getType());
+        notification.setOuterid(comment.getParentId());
+        notification.setNotifier(comment.getCommentator());
+        notification.setStatus(NotifitionTypeEnum.UNREAD.getStatus());
+        notification.setReceiver(receiver);
+        notification.setOuterTitle(Title);
+        notificationService.save(notification);
+    }
 
 
     @Override

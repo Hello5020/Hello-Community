@@ -64,7 +64,7 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     @Override
     public List<QuestionDTO> getAll(Integer id, Integer page, Integer size) {
         Page<Question> pages = new Page<>(page, size);
-        Page<Question> questionPage = questionMapper.selectByCreator(pages, id);
+        questionMapper.selectByCreator(pages, id);
         List<Question> questionList = pages.getRecords();
         List<QuestionDTO> questions = new ArrayList<>();
         for (Question question:
