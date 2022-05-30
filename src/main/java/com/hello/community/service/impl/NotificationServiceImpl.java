@@ -62,7 +62,6 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
         }
         return notifications;
     }
-
     @Override
     public Long unreadCount(Integer id) {
         QueryWrapper<Notification> queryWrapper = new QueryWrapper<>();
