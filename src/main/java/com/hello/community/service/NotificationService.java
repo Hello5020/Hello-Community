@@ -16,4 +16,6 @@ public interface NotificationService extends IService<Notification> {
 
     Page<Notification> getPageByID(Page<Notification> page,Integer id);
     List<NotificationDTO> list(Integer id, Integer page, Integer size);
+
+    Long unreadCount(Integer id);
 }

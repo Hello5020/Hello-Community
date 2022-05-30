@@ -81,7 +81,6 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
             questionService.incCommentCount(question);
             createNotify(comment,question.getCreator(),NotifitionEnum.REPLY_QUESTION,question.getTitle());
         }
-
     }
 
     private void createNotify(Comment comment, Integer receiver, NotifitionEnum replyComment,String Title) {

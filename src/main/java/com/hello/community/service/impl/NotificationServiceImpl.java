@@ -8,6 +8,7 @@ import com.hello.community.bean.Question;
 import com.hello.community.bean.User;
 import com.hello.community.dto.NotificationDTO;
 import com.hello.community.dto.QuestionDTO;
+import com.hello.community.enums.NotifitionEnum;
 import com.hello.community.service.NotificationService;
 import com.hello.community.mapper.NotificationMapper;
 import com.hello.community.service.UserService;
@@ -52,9 +53,17 @@ public class NotificationServiceImpl extends ServiceImpl<NotificationMapper, Not
             NotificationDTO notificationDTO = new NotificationDTO();
             BeanUtils.copyProperties(notification,notificationDTO);
             notificationDTO.setNotifier(user);
+            notificationDTO.setType(NotifitionEnum.nameOfType(notification.getType()));
             notifications.add(notificationDTO);
         }
         return notifications;
+    }
+
+    @Override
+    public Long unreadCount(Integer id) {
+        QueryWrapper<Notification> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("receiver",id);
+        return notificationMapper.selectCount(queryWrapper);
     }
 }
 

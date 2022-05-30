@@ -15,8 +15,19 @@ public enum NotifitionEnum {
         return name;
     }
 
+
     NotifitionEnum(int status, String name) {
         this.type = status;
         this.name = name;
+    }
+
+    public static String nameOfType(int type){
+        for (NotifitionEnum notifition:
+             NotifitionEnum.values()) {
+            if (notifition.getType() == type) {
+                return notifition.getName();
+            }
+        }
+        return "";
     }
 }
