@@ -24,6 +24,6 @@
         *
         from notification
         where
-        receiver = #{receiverId,jdbcType=NUMERIC}
+        receiver = #{receiverId,jdbcType=NUMERIC} order by gmt_create desc
     </select>
 </mapper>

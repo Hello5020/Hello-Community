@@ -2,6 +2,7 @@ package com.hello.community.interceptor;
 
 
 import com.hello.community.bean.User;
+import com.hello.community.service.NotificationService;
 import com.hello.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,8 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    NotificationService notificationService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -28,6 +31,8 @@ public class SessionInterceptor implements HandlerInterceptor {
                     User user = userService.getUserByToken(token);
                     if (user != null) {
                         request.getSession().setAttribute("loginUser", user);
+                        Long unreadCount = notificationService.unreadCount(user.getId());
+                        request.getSession().setAttribute("unreadCount",unreadCount);
                     }
                     break;
                 }

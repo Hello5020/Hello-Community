@@ -33,7 +33,7 @@
         <include refid="Base_Column_List"/>
         from question
         where
-        creator = #{creator,jdbcType=NUMERIC}
+        creator = #{creator,jdbcType=NUMERIC} order by gmt_create desc
     </select>
     <update id="updateById">
         update question

@@ -137,7 +137,7 @@
                     <span class="iconfont icon-wenti" aria-hidden="true"></span>我的提问
                 </a>
                 <a th:href="@{/profile/replies}"  th:class="${section == 'replies'}? 'active list-group-item' : 'list-group-item'">
-                    <span class="badge" th:text="${unreadCount}">1</span>
+                    <span class="badge" th:text="${session.unreadCount}">1</span>
                     <span class="iconfont icon-huifu" aria-hidden="true"></span>最新回复
                 </a>
             </div>
