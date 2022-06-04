@@ -2,7 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:include="common :: commonheader"></div>
+    <script th:src="@{/js/editormd.min.js}" type="application/javascript"></script>
+    <script th:src="@{/js/lib/marked.min.js}"></script>
+    <script th:src="@{/js/lib/prettify.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/community.css}"/>
+    <link rel="stylesheet" th:href="@{/css/editormd.preview.min.css}"/>
     <title th:text="${question.title}"></title>
 </head>
 <body>
@@ -23,7 +27,14 @@
                         /发布时间:<span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span>
                     </span>
                <hr style="border:double #777777;">
-               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"></div><br>
+               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view" >
+                   <textarea style="display:none;" th:text="${question.description}">### Hello world!</textarea>
+               </div>
+               <script type="text/javascript">
+               $(function() {
+                editormd.markdownToHTML("question-view", {});
+               });
+           </script> <br>
                <hr class="hr1">
                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin: 10px;">
                    <span th:each="tag:${question.tag.split(',')}">
