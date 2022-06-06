@@ -10,7 +10,8 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode{
     COMMENT_NOT_FOUND(5004,"操作评论不存在!"),
     COMMENT_IS_EMPTY(5006,"评论不能为空!"),
     READ_NOTIFICATION_FAIL(5007,"无法读取他人信息!"),
-    NOTIFICATION_NOT_FOUND(5008,"通知离家出走了!");
+    NOTIFICATION_NOT_FOUND(5008,"通知离家出走了!"),
+    FILE_UPLOAD_FAIL(5009,"文件上传失败!" );
 
     private Integer code;
 
