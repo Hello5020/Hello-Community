@@ -34,12 +34,18 @@ public class IndexController {
 
     @GetMapping("/")
     public String hello(Model model,
-                        @RequestParam(value = "page",defaultValue = "1")Integer page){
+                        @RequestParam(value = "page",defaultValue = "1")Integer page,
+                        @RequestParam(value = "search",required = false)String search){
         Integer size = 8;
         Page<Question> pages = new Page<>(page, size);
         Page<Question> page1 = questionService.page(pages, null);
         List<QuestionDTO> questionList = questionService.getAll(page,size);
+        if (search != null) {
+            questionList = questionService.getAll(search,page,size);
+        }
+        List<QuestionDTO> hotQuestionList = questionService.getHotQuestion(size);
         model.addAttribute("questions",questionList);
+        model.addAttribute("hotQuestions",hotQuestionList);
         model.addAttribute("pn",page1);
         return "index";
     }
@@ -77,7 +83,7 @@ public class IndexController {
             user.setAvatarUrl(userCheckAll.getAvatarUrl());
             userService.insertOrUpdateUser(user);
             session.setAttribute("loginUser",user);
-            return hello(model,1);
+            return hello(model,1,null);
         }else {
             model.addAttribute("msg","账号密码错误!");
             return loginPage(model);

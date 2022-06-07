@@ -23,6 +23,14 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="iconfont icon-viewlist" aria-hidden="true"></span>发现</h2>
             <hr  width="80%" color=#987cb9 SIZE=3>
+            <div class="media" th:if="${questions.size() == 0}">
+                <h3 style="font-family: serif;margin-left: 125px;color: #9a9aeb;font-weight: bold;">
+                抱歉,未找到相关问题!</h3>
+                <img alt="" th:src="@{/images/searchfail.png}"
+                     style="margin-left: 120px; ">
+                <p><a class="btn btn-success btn-lg" th:href="@{/}" role="button"
+                      style="margin-left: 120px;">|返回主页|</a></p>
+            </div>
             <div class="media" th:each="question : ${questions}">
                 <div class="media-left" >
                     <a href="#">
@@ -84,10 +92,28 @@
             </nav>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3><span class="iconfont icon-huo" aria-hidden="true">
+            <h3><span class="iconfont icon-huo" aria-hidden="true" style="color: red;">
             </span>热门话题</h3>
+            <hr style="
+            size: inherit;
+            border-top: 2px solid #ee9d29;
+            ">
+            <ul style="border: #e8e8e8;border-style: groove;border-radius: 8px;border-block-width: inherit;">
+                <li th:each="related:${hotQuestions}" style="margin-top: 16px;margin-bottom: 16px;">
+                    <a  th:href="@{'/question/'+${related.id}}" th:text="${related.title}"
+                        style="font-size: large;color: #e35809;"></a>
+                </li>
+            </ul>
+            <hr style="border:double #777777;" >
+            <h4 style="margin-top: -15px"><span class="iconfont icon-kaifa" aria-hidden="true" style="font-size: 29px;color: #626767;"></span>站长联系方式</h4>
+            <img th:src="@{/images/mmqrcode1652533109107.png}" style="width: 150px;margin-left: 80px;">
+            <h5 style="margin-top: 30px;">
+                <span class="glyphicon glyphicon-envelope" aria-hidden="true" style="color: #23bbe8;font-size: 20px;"></span>
+                <span style="font-weight: bold;">站长邮箱:hellocrow1327@163.com</span>
+            </h5>
         </div>
     </div>
 </div>
+<div th:insert="common :: foot"></div>
 </body>
 </html>

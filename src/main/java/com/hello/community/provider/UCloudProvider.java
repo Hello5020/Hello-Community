@@ -23,6 +23,20 @@ public class UCloudProvider {
     @Value("${ucloud.us3.private-key}")
     private String privateKey;
 
+
+    @Value("${ucloud.us3.bucket-name}")
+    private String bucketName;
+
+    @Value("${ucloud.us3.region}")
+    private String region;
+
+    @Value("${ucloud.us3.suffix}")
+    private String suffix;
+
+    @Value("${ucloud.us3.expires}")
+    private Integer expires;
+
+
     public  String upload(InputStream fileStream, String mimeType,String fileName){
         String generatedFileName;
         String[] filePaths = fileName.split("\\.");
@@ -33,11 +47,12 @@ public class UCloudProvider {
         }
         try {
             ObjectAuthorization OBJECT_AUTHORIZER =  new UfileObjectLocalAuthorization(publicKey, privateKey);
-            ObjectConfig config = new ObjectConfig("cn-bj","ufileos.com");
+            ObjectConfig config = new ObjectConfig(region,suffix);
+
             PutObjectResultBean response = UfileClient.object(OBJECT_AUTHORIZER, config)
                     .putObject(fileStream, mimeType)
                     .nameAs(generatedFileName)
-                    .toBucket("hellocrow")
+                    .toBucket(bucketName)
                     /**
                      * 是否上传校验MD5, Default = true
                      */
@@ -56,11 +71,32 @@ public class UCloudProvider {
                         }
                     })
                     .execute();
+                    if(response != null && response.getRetCode() == 0){
+                        String url = UfileClient.object(OBJECT_AUTHORIZER, config)
+                                .getDownloadUrlFromPrivateBucket(generatedFileName, bucketName, expires)
+                                /**
+                                 * 使用Content-Disposition: attachment，并且默认文件名为KeyName
+                                 */
+//                    .withAttachment()
+                                /**
+                                 * 使用Content-Disposition: attachment，并且配置文件名
+                                 */
+//                    .withAttachment("filename")
+                                /**
+                                 * 图片处理服务
+                                 * https://docs.ucloud.cn/ufile/service/pic
+                                 */
+//                    .withIopCmd("iopcmd=rotate&degree=90")
+                                .createUrl();
+
+                                return url;
+                    }else {
+                        throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
+                    }
         } catch (UfileClientException e) {
-            e.printStackTrace();
+            throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
         } catch (UfileServerException e) {
-            e.printStackTrace();
+            throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_FAIL);
         }
-        return generatedFileName;
     }
 }

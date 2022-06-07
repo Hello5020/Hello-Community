@@ -69,7 +69,7 @@
                         <div class="huifu" th:text="${comment.content}">回复内容</div>
                         <div class="comment-div menu">
                             <span class="iconfont icon-icon icon-size" aria-hidden="true"
-                                  th:text="${comment.getLikeCount()}">
+                                  th:text="${comment.getLikeCount()}" th:data-lid="${comment.id}" onclick="AddLikeCount(this)">
                             </span>
                             <span class="iconfont icon-pinglun icon-size" aria-hidden="true"
                                   th:data-id="${comment.id}" onclick="collapseComments(this)"
@@ -196,5 +196,6 @@
         </div>
     </div>
 </div>
+<div th:insert="common :: foot"></div>
 </body>
 </html>

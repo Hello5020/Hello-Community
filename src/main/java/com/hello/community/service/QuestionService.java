@@ -19,10 +19,13 @@ public interface QuestionService extends IService<Question> {
     void create(Question question);
     List<QuestionDTO> getAll(Integer page,Integer size);
     List<QuestionDTO> getAll(Integer id,Integer page,Integer size);
+    List<QuestionDTO> getAll(String searchText,Integer page,Integer size);
     Page<Question> getPageByCreator(Page<Question> page,Integer creator);
     QuestionDTO getQuestionById(Integer id);
     void createOrUpdate(Question question);
     void incView(Integer id);
     void incCommentCount(Question question);
     List<QuestionDTO> getQuestionsByTags(QuestionDTO question);
+
+    List<QuestionDTO> getHotQuestion(Integer size);
 }

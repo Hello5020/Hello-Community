@@ -79,6 +79,26 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
     }
 
     @Override
+    public List<QuestionDTO> getAll(String searchText, Integer page, Integer size) {
+        Page<Question> pages = new Page<>(page, size);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.like("title",searchText);
+        queryWrapper.orderByDesc("gmt_create");
+        questionMapper.selectPage(pages,queryWrapper);
+        List<Question> questionList = pages.getRecords();
+        List<QuestionDTO> questions = new ArrayList<>();
+        for (Question question:
+                questionList) {
+            User user = userService.getUserById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(user);
+            questions.add(questionDTO);
+        }
+        return questions;
+    }
+
+    @Override
     public Page<Question> getPageByCreator(Page<Question> page, Integer creator) {
         return questionMapper.selectByCreator(page,creator);
     }
@@ -144,6 +164,25 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
             return questionDTO;
         }).collect(Collectors.toList());
         return collect;
+    }
+
+    @Override
+    public List<QuestionDTO> getHotQuestion(Integer size) {
+        Page<Question> pages = new Page<>(1, size);
+        QueryWrapper queryWrapper = new QueryWrapper();
+        queryWrapper.orderByDesc("view_count");
+        questionMapper.selectPage(pages,queryWrapper);
+        List<Question> questionList = pages.getRecords();
+        List<QuestionDTO> questions = new ArrayList<>();
+        for (Question question:
+                questionList) {
+            User user = userService.getUserById(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(user);
+            questions.add(questionDTO);
+        }
+        return questions;
     }
 
 }

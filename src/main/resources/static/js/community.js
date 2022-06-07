@@ -129,3 +129,32 @@ function showSelectTag() {
 function hideSelectTag() {
     $("#selectTag").hide()
 }
+function AddLikeCount(e){
+    $.ajax({
+        type:"POST",
+        url: "/comment",
+        contentType:"application/json",
+        data: JSON.stringify({
+            "parentId": targetId,
+            "content": content,
+            "type": 3
+        }),
+        success: function (response) {
+            if (response.code == 5200){
+                window.location.reload();
+            }else {
+                if(response.code == 5003){
+                    var isAccepted = confirm(response.message);
+                    if (isAccepted){
+                        window.open("/login");
+                        window.localStorage.setItem("closeable",true);
+                    }
+                }else {
+                    alert(response.message);
+                }
+            }
+            console.log(response);
+        },
+        dataType: "json"
+    });
+}

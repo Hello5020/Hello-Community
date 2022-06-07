@@ -25,7 +25,7 @@
             </label>
             <div class="input-text">
                 <span class='iconfont icon-mine'></span>
-                <input type="text" name="name" placeholder="用户名" th:value="${name}">
+                <input type="text" name="name" placeholder="用户名" th:value="${name}" autocomplete="off">
             </div>
             <div class="input-text">
                 <span class='iconfont icon-lock'></span>
@@ -38,5 +38,6 @@
             <button class="input-btn" type="submit">注册</button>
         </form>
     </div>
+    <div th:insert="common :: foot"></div>
 </body>
 </html>

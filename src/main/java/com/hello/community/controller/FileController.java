@@ -21,13 +21,17 @@ public class FileController {
     @ResponseBody
     public FileDTO upload(HttpServletRequest request){
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        FileDTO fileDTO = new FileDTO();
-        MultipartFile file = ((MultipartHttpServletRequest) request).getFile("editormd-image-file");
+        MultipartFile file = multipartRequest.getFile("editormd-image-file");
         try {
-            uCloudProvider.upload(file.getInputStream(),file.getContentType(),file.getOriginalFilename());
-        } catch (IOException e) {
+            String fileName = uCloudProvider.upload(file.getInputStream(), file.getContentType(), file.getOriginalFilename());
+            FileDTO fileDTO = new FileDTO();
+            fileDTO.setSuccess(1);
+            fileDTO.setUrl(fileName);
+            return fileDTO;
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        FileDTO fileDTO = new FileDTO();
         fileDTO.setSuccess(1);
         fileDTO.setUrl("/images/bg.jpg");
         return fileDTO;

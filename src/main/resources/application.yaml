@@ -48,3 +48,7 @@ ucloud:
   us3:
     public-key: TOKEN_7f7b56e9-f52b-4c69-8648-2404759901eb
     private-key: ff6ce5e2-c85a-44e3-a046-eaee9ec199f0
+    bucketName: hellocrow
+    region: cn-bj
+    suffix: ufileos.com
+    expires: 31536000
