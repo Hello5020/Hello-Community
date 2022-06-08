@@ -26,6 +26,9 @@
                         /阅读数:<span th:text="${question.viewCount}"></span>
                         /发布时间:<span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span>
                     </span>
+               <span class="glyphicon glyphicon-thumbs-up pull-right icon-size" aria-hidden="true"
+                     th:text="${question.getLikeCount()}" th:data-qlid="${question.id}" onclick="AddLikeCountToQuestion(this)">
+               </span>
                <hr style="border:double #777777;">
                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view" >
                    <textarea style="display:none;" th:text="${question.description}">### Hello world!</textarea>
@@ -69,7 +72,7 @@
                         <div class="huifu" th:text="${comment.content}">回复内容</div>
                         <div class="comment-div menu">
                             <span class="iconfont icon-icon icon-size" aria-hidden="true"
-                                  th:text="${comment.getLikeCount()}" th:data-lid="${comment.id}" onclick="AddLikeCount(this)">
+                                  th:text="${comment.getLikeCount()}" th:data-lid="${comment.id}" onclick="AddLikeCountToComment(this)">
                             </span>
                             <span class="iconfont icon-pinglun icon-size" aria-hidden="true"
                                   th:data-id="${comment.id}" onclick="collapseComments(this)"

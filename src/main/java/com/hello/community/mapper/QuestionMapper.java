@@ -33,6 +33,8 @@ public interface QuestionMapper extends BaseMapper<Question> {
     int updateCommentCountById(Question question);
 
     List<Question> selectByTag(Question question);
+
+    void updateLikeCountById(Question question);
 }
 
 

@@ -2,8 +2,9 @@ package com.hello.community.enums;
 
 public enum NotifitionEnum {
     REPLY_QUESTION(1,"回复了你的问题"),
-    REPLY_COMMENT(2,"回复了你的评论")
-    ;
+    REPLY_COMMENT(2,"回复了你的评论"),
+    LIKE_COMMENT(3,"点赞了你的评论"),
+    LIKE_QUESTION(4,"点赞了你的问题");
     private int type;
     private String name;
 

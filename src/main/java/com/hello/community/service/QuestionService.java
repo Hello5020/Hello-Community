@@ -28,4 +28,7 @@ public interface QuestionService extends IService<Question> {
     List<QuestionDTO> getQuestionsByTags(QuestionDTO question);
 
     List<QuestionDTO> getHotQuestion(Integer size);
+
+    void incLikeCount(Question question);
+    void delLikeCount(Question question);
 }

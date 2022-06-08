@@ -129,15 +129,44 @@ function showSelectTag() {
 function hideSelectTag() {
     $("#selectTag").hide()
 }
-function AddLikeCount(e){
+function AddLikeCountToComment(e){
+    var targetId = e.getAttribute("data-lid");
     $.ajax({
         type:"POST",
-        url: "/comment",
+        url: "/like",
         contentType:"application/json",
         data: JSON.stringify({
             "parentId": targetId,
-            "content": content,
-            "type": 3
+            "type": 2
+        }),
+        success: function (response) {
+            if (response.code == 5200){
+                window.location.reload();
+            }else {
+                if(response.code == 5003){
+                    var isAccepted = confirm(response.message);
+                    if (isAccepted){
+                        window.open("/login");
+                        window.localStorage.setItem("closeable",true);
+                    }
+                }else {
+                    alert(response.message);
+                }
+            }
+            console.log(response);
+        },
+        dataType: "json"
+    });
+}
+function AddLikeCountToQuestion(e) {
+    var targetId = e.getAttribute("data-qlid");
+    $.ajax({
+        type:"POST",
+        url: "/like",
+        contentType:"application/json",
+        data: JSON.stringify({
+            "parentId": targetId,
+            "type": 1
         }),
         success: function (response) {
             if (response.code == 5200){

@@ -185,6 +185,18 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question>
         return questions;
     }
 
+    @Override
+    public void incLikeCount(Question question) {
+        question.setLikeCount(1);
+        questionMapper.updateLikeCountById(question);
+    }
+
+    @Override
+    public void delLikeCount(Question question) {
+        question.setLikeCount(-1);
+        questionMapper.updateLikeCountById(question);
+    }
+
 }
 
 

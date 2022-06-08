@@ -25,6 +25,11 @@
         set comment_count = comment_count + #{commentCount,jdbcType=NUMERIC}
         where id = #{id,jdbcType=NUMERIC}
     </update>
+    <update id="updateLikeCountById">
+        update comment
+        set like_count = like_count + #{likeCount,jdbcType=NUMERIC}
+        where id = #{id,jdbcType=NUMERIC}
+    </update>
     <select id="selectList" resultType="com.hello.community.bean.Comment">
         select * from comment ${ew.customSqlSegment}
     </select>

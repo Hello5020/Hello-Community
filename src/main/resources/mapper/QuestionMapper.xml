@@ -55,6 +55,11 @@
         set comment_count = comment_count + #{commentCount,jdbcType=NUMERIC}
         where id = #{id,jdbcType=NUMERIC}
     </update>
+    <update id="updateLikeCountById">
+        update question
+        set like_count = like_count + #{likeCount,jdbcType=NUMERIC}
+        where id = #{id,jdbcType=NUMERIC}
+    </update>
     <select id="selectByTag" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

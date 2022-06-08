@@ -136,6 +136,11 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment>
         Page<Comment> commentPage = commentMapper.selectList(pages,queryWrapper);
         return commentPage;
     }
+
+    @Override
+    public void updateLikeCountById(Comment dbComment) {
+        commentMapper.updateLikeCountById(dbComment);
+    }
 }
 
 

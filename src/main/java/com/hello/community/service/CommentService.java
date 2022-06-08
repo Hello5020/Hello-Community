@@ -5,6 +5,7 @@ import com.hello.community.bean.Comment;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hello.community.dto.CommentDTO;
 import com.hello.community.enums.CommentTypeEnum;
+import com.hello.community.enums.NotifitionEnum;
 
 import java.util.List;
 
@@ -21,4 +22,5 @@ public interface CommentService extends IService<Comment> {
 
     Page<Comment> get(Integer id, Integer page, Integer size, CommentTypeEnum type);
 
+    void updateLikeCountById(Comment dbComment);
 }

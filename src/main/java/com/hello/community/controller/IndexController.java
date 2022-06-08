@@ -89,5 +89,8 @@ public class IndexController {
             return loginPage(model);
         }
     }
-
+    @GetMapping("/personal")
+    public String personalPage(){
+        return "personalpage";
+    }
 }
