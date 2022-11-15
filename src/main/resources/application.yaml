@@ -2,8 +2,8 @@ server:
   port: 8889
 github:
   client:
-    id: fd6e83c078c4d597be9a
-    secret: 4d9d46c5582c6563d09e3355d4a4a810a44da51c
+    id: 
+    secret: 
   redirect:
     uri: http://localhost:8889/callback
 spring:
